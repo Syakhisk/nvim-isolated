@@ -24,14 +24,12 @@ end
 -- For example, `/home/user/.config/nvim/lua/modules/requireall/init.lua`
 -- will be converted to `modules/requireall`
 local filepath_to_modulename = function(filepath)
+  local strings = require("util.strings")
   local config_path = vim.fn.stdpath("config")
-  vim.notify("Udin0: " .. filepath)
-  vim.notify("Udin1: " .. config_path)
-  local modulename = filepath:gsub(config_path, "") -- remove the prefix path
+  local modulename = strings.replace(filepath, config_path, "") -- remove the prefix path
   modulename = modulename:gsub("^/lua", "") -- remove the `/lua` prefix
   modulename = modulename:gsub(".lua$", "") -- remove the `.lua` suffix
-  vim.notify("Nidu: " .. modulename)
-  -- modulename = modulename:sub(2) -- remove the leading `/`
+  modulename = modulename:sub(2) -- remove the leading `/`
   return modulename
 end
 

@@ -1,7 +1,7 @@
----@class Customutil
+---@class Log
 local M = {}
 
-M.log_to_file = function(...)
+M.to_file = function(...)
   local args = { ... }
   local str = ""
   for _, v in ipairs(args) do

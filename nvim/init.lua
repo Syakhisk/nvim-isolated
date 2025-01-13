@@ -1,4 +1,4 @@
-_G.Customutil = require("lib.customutil")
+_G.Log = require("util.log")
 
 require("config.options")
 require("config.lazy")
