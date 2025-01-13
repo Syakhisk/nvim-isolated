@@ -4,11 +4,15 @@ local get_caller_paths = function()
   -- f level 0 is the current function (`getinfo` itself);
   -- f level 1 is the function that called `getinfo`;
   -- and so on
+
   local f = 3
   local info = debug.getinfo(f, "S")
 
   -- remove the first char of the source path, because it starts with `@`
-  local filepath = info.source:sub(2)
+  local filepath = info.source
+  if filepath:sub(1, 1) == "@" then
+    filepath = filepath:match("^@(.*)$")
+  end
 
   return {
     filepath = filepath,
@@ -21,10 +25,13 @@ end
 -- will be converted to `modules/requireall`
 local filepath_to_modulename = function(filepath)
   local config_path = vim.fn.stdpath("config")
+  vim.notify("Udin0: " .. filepath)
+  vim.notify("Udin1: " .. config_path)
   local modulename = filepath:gsub(config_path, "") -- remove the prefix path
   modulename = modulename:gsub("^/lua", "") -- remove the `/lua` prefix
   modulename = modulename:gsub(".lua$", "") -- remove the `.lua` suffix
-  modulename = modulename:sub(2) -- remove the leading `/`
+  vim.notify("Nidu: " .. modulename)
+  -- modulename = modulename:sub(2) -- remove the leading `/`
   return modulename
 end
 
