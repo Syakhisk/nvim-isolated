@@ -1,7 +1,9 @@
 # Before can edit in isolated:
+- [ ] telescope
+- [ ] comment
+- [ ] format
 - [ ] lsp on attaches
 - [ ] nvim-cmp
-- [ ] telescope
 - [ ] treesitter
 
 # TODO:

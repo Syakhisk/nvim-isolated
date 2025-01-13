@@ -1,4 +1,4 @@
-local util = require("plugins.editor.neo-tree.util")
+local util = require "plugins.editor.neo-tree.util"
 
 return {
   "nvim-neo-tree/neo-tree.nvim",
@@ -12,7 +12,6 @@ return {
   init = util.init_fn,
   opts = {
     close_if_last_window = true,
-    popup_border_style = "single", -- "double", "none", "rounded", "shadow", "single" or "solid"
     window = { -- see https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/popup
       position = "float", -- left, right, top, bottom, float, current
       -- width = 40, -- applies to left and right positions
@@ -22,6 +21,20 @@ return {
       popup = {
         size = { width = "100%", height = "60%" },
         position = { col = "50%", row = "100%" },
+        border = {
+          style = {
+            top_left = "",
+            top = "─",
+            top_right = "",
+            right = "",
+            bottom_right = "",
+            bottom = "",
+            bottom_left = "",
+            left = "",
+          },
+          highlight = "Normal:Normal",
+          text = { top = "NeoTree", top_align = "center" },
+        },
         title = function(state) -- format the text that appears at the top of a popup window
           return state.name:gsub("^%l", string.upper)
         end,
@@ -44,11 +57,15 @@ return {
         ["s"] = "none",
       },
     },
+
+    buffers = { window = { popup = { border = { text = { top = "Buffers" } } } } },
+    git_status = { window = { popup = { border = { text = { top = "Git Status" } } } } },
     filesystem = {
       bind_to_cwd = true, -- true creates a 2-way binding between vim's cwd and neo-tree's root
       hijack_netrw_behavior = "open_current",
       follow_current_file = { enabled = true },
       use_libuv_file_watcher = true,
+      window = { popup = { border = { text = { top = "Filesystem" } } } },
       filtered_items = {
         visible = true, -- when true, they will just be displayed differently than normal items
         force_visible_in_empty_folder = false, -- when true, hidden files will be shown if the root folder is otherwise empty
