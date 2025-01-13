@@ -2,12 +2,12 @@ local M = {}
 
 function M.find_files()
   return function()
-    if not vim.fn.executable("rg") then
+    if not vim.fn.executable "rg" then
       require("telescope.builtin").find_files()
       return
     end
 
-    require("telescope.builtin").find_files({
+    require("telescope.builtin").find_files {
       find_command = {
         "rg",
         "--follow", -- Follow symbolic links
@@ -30,8 +30,12 @@ function M.find_files()
         "--glob=!**/yarn.lock",
         "--glob=!**/package-lock.json",
       },
-    })
+    }
   end
+end
+
+M.key_live_grep_actions = function(prompt_bufnr)
+  require("telescope-live-grep-args.actions").quote_prompt { postfix = " -g !*mock* -g !*_test.go " }(prompt_bufnr)
 end
 
 return M

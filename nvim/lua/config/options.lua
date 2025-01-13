@@ -1,6 +1,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- don't automatically select (highlight) autocomplete if only one
+-- it causes tab to unselect it
+vim.opt.completeopt = "menu,menuone,noselect"
 
 vim.opt.number = true
 vim.opt.mouse = "a"
