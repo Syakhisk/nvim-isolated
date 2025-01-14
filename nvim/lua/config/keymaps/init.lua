@@ -12,7 +12,8 @@ vim.keymap.set("n", "<c-w>l", require("lib.tmux").navigate "l")
 vim.keymap.set("n", "<leader><space>", vim.cmd.w, { desc = "Save file" })
 
 -- Comments
--- vim.keymap.set("
+vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle comments", remap = true })
+vim.keymap.set("v", "<leader>/", "gc", { desc = "Toggle comments", remap = true })
 
 -- Format
 -- (simple)
