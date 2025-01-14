@@ -7,7 +7,7 @@ local M = {}
 
 setmetatable(M, {
   __index = function(t, k)
-    local mod, ok = pcall(require, "util." .. k)
+    local ok, mod = pcall(require, "util." .. k)
     if not ok then
       return
     end

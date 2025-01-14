@@ -2,7 +2,7 @@ return {
   {
     "debugloop/telescope-undo.nvim",
     config = function()
-      require("util.pkg").on_load("telescope.nvim", function()
+      Util.pkg.on_load("telescope.nvim", function()
         require("telescope").load_extension "undo"
       end)
     end,
