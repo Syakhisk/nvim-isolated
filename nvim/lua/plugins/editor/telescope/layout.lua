@@ -15,6 +15,8 @@ end
 M.create_layout = function(picker)
   local Layout = require "nui.layout"
 
+  -- TODO: optimize this,
+  -- either write all fields or clean up current one (remove dupes)
   local border = {
     results = {
       top_left = "┌",
@@ -46,7 +48,7 @@ M.create_layout = function(picker)
       top_right = "",
       right = "",
       bottom_right = "",
-      bottom = "",
+      bottom = "-",
       bottom_left = "",
       left = "",
     },

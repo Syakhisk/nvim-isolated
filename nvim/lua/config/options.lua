@@ -42,12 +42,26 @@ vim.opt.fillchars = {
 }
 
 vim.opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-vim.opt.winminwidth = 5 -- Minimum window width
-vim.opt.wrap = false -- Disable line wrap
+vim.opt.winminwidth = 5       -- Minimum window width
+vim.opt.wrap = false          -- Disable line wrap
 
 vim.opt.inccommand = "nosplit"
 vim.opt.incsearch = true
 
+vim.opt.shortmess:append({ W = true, I = false, c = true, C = true })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = vim.api.nvim_create_augroup("FormatOptions", { clear = true }),
+  pattern = { "*" },
+  callback = function()
+    vim.opt.formatoptions:append({ c = false, r = false, o = false })
+  end,
+})
+
 -- vim.opt.breakindent = true
+-- vim.opt.showbreak = "↪ "
+-- vim.opt.linebreak = true
+-- vim.opt.breakindentopt = "shift:2"
+
 -- vim.opt.updatetime = 250
 -- vim.opt.timeoutlen = 300

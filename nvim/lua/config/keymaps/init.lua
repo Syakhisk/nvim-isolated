@@ -10,3 +10,10 @@ vim.keymap.set("n", "<c-w>l", require("lib.tmux").navigate "l")
 
 -- Save
 vim.keymap.set("n", "<leader><space>", vim.cmd.w, { desc = "Save file" })
+
+-- Comments
+-- vim.keymap.set("
+
+-- Format
+-- (simple)
+vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format file" })

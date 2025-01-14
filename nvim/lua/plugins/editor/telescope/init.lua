@@ -72,7 +72,7 @@ return {
             ["<tab>"] = actions.move_selection_next,
             ["<s-tab>"] = actions.move_selection_previous,
 
-            ["<m-p>"] = layout.toggle_preview,
+            ["<c-s-p>"] = layout.toggle_preview,
 
             ["<c-n>"] = actions.toggle_selection + actions.move_selection_worse,
             ["<c-p>"] = actions.move_selection_better + actions.toggle_selection,
@@ -82,7 +82,7 @@ return {
             ["<tab>"] = actions.move_selection_next,
             ["<s-tab>"] = actions.move_selection_previous,
 
-            ["<m-p>"] = layout.toggle_preview,
+            ["<c-s-p>"] = layout.toggle_preview,
 
             ["<c-n>"] = actions.toggle_selection + actions.move_selection_worse,
             ["<c-p>"] = actions.move_selection_better + actions.toggle_selection,

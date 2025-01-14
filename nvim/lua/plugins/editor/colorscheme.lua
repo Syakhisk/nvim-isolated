@@ -2,6 +2,7 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = true,
+    priority = 1000,
     opts = {
       style = "night",
       transparent = true,
@@ -13,6 +14,8 @@ return {
   },
   {
     "maxmx03/fluoromachine.nvim",
+    lazy = true,
+    priority = 1000,
     config = function()
       local fm = require "fluoromachine"
 
@@ -53,8 +56,6 @@ return {
           }
         end,
       }
-
-      vim.cmd.colorscheme "fluoromachine"
     end,
   },
 }
