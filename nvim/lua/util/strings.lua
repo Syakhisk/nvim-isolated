@@ -1,3 +1,4 @@
+---@class UtilStrings
 local M = {}
 
 --- Performs plain substring replacement, treating `pattern` and `replacement` as literal strings.

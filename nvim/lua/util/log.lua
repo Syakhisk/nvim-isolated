@@ -1,4 +1,4 @@
----@class Log
+---@class UtilLog
 local M = {}
 
 M.to_file = function(...)

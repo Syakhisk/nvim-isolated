@@ -3,7 +3,7 @@ return {
     "nvim-telescope/telescope-live-grep-args.nvim",
     version = "^1.0.0",
     config = function()
-      require("util.on_load").on_load("telescope.nvim", function()
+      require("util.pkg").on_load("telescope.nvim", function()
         require("telescope").load_extension "live_grep_args"
       end)
     end,

@@ -1,4 +1,4 @@
-_G.Log = require("util.log")
+_G.Util = require("util")
 
 require("config.options")
 require("config.lazy")

@@ -1,3 +1,4 @@
+---@class UtilLoader
 local M = {}
 
 local get_caller_paths = function()
