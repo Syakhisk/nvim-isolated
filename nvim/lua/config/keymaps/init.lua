@@ -16,5 +16,4 @@ vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle comments", remap = true
 vim.keymap.set("v", "<leader>/", "gc", { desc = "Toggle comments", remap = true })
 
 -- Format
--- (simple)
-vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format file" })
+vim.keymap.set({"n", "v"}, "<leader>lf", Util.formatter.format, { desc = "Format file" })

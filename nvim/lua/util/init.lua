@@ -3,6 +3,7 @@
 ---@field pkg UtilPkg
 ---@field strings UtilStrings
 ---@field loader UtilLoader
+---@field formatter UtilFormatter
 local M = {}
 
 setmetatable(M, {
