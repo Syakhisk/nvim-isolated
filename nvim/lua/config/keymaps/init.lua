@@ -17,12 +17,3 @@ vim.keymap.set("v", "<leader>/", "gc", { desc = "Toggle comments", remap = true 
 
 -- Format
 vim.keymap.set({ "n", "v" }, "<leader>lf", Util.formatter.format, { desc = "Format file" })
-
-
--- if vim.fn.executable("lazygit") == 1 then
---   map("n", "<leader>gg", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
---   map("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
---   map("n", "<leader>gf", function() Snacks.lazygit.log_file() end, { desc = "Lazygit Current File History" })
---   map("n", "<leader>gl", function() Snacks.lazygit.log({ cwd = LazyVim.root.git() }) end, { desc = "Lazygit Log" })
---   map("n", "<leader>gL", function() Snacks.lazygit.log() end, { desc = "Lazygit Log (cwd)" })
--- end

@@ -3,9 +3,9 @@
 - [x] nvim-cmp
 - [x] comment
 - [x] format
-- [ ] Lazygit
-- [ ] lsp on attaches (complete it)
+- [x] lazygit
 - [ ] treesitter
+- [ ] lsp on attaches (complete it)
 - [ ] AI
 
 # Low Prio:
