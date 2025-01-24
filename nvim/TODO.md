@@ -4,9 +4,11 @@
 - [x] comment
 - [x] format
 - [x] lazygit
-- [ ] treesitter
+- [x] treesitter
+- [x] auto pairs
 - [ ] lsp on attaches (complete it)
 - [ ] AI
+- [ ] simple dap viewer (see reddit)
 
 # Low Prio:
 - [ ] Remove unneeded preview in telescope
