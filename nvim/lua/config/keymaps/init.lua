@@ -17,3 +17,9 @@ vim.keymap.set("v", "<leader>/", "gc", { desc = "Toggle comments", remap = true 
 
 -- Format
 vim.keymap.set({ "n", "v" }, "<leader>lf", Util.formatter.format, { desc = "Format file" })
+
+-- Select pasted text
+vim.keymap.set("n", "gp", "`[v`]", { desc = "Select last pasted text" })
+
+-- Duplicate and comment
+vim.keymap.set("n", "yc", "yygccp", { desc = "Duplicate line and comment the original" })

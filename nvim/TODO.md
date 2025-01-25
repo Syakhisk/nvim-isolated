@@ -9,8 +9,10 @@
 - [ ] lsp on attaches (complete it)
 - [ ] AI
 - [ ] simple dap viewer (see reddit)
+- [ ] snippet
 
 # Low Prio:
+- [ ] Simple dashboard
 - [ ] Remove unneeded preview in telescope
 - [ ] Notifier
 - [ ] Put "lazy" in plugins that you don't want to setup directly

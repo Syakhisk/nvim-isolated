@@ -1,9 +1,9 @@
 local M = {}
 
-local TSLayout = require "telescope.pickers.layout"
+local TSLayout = require("telescope.pickers.layout")
 
 local function make_popup(options)
-  local Popup = require "nui.popup"
+  local Popup = require("nui.popup")
 
   local popup = Popup(options)
   function popup.border:change_title(title)
@@ -12,8 +12,59 @@ local function make_popup(options)
   return TSLayout.Window(popup)
 end
 
+-- M.create_layout = function(picker)
+--   local function create_window(enter, width, height, row, col, title)
+--     local bufnr = vim.api.nvim_create_buf(false, true)
+--     local winid = vim.api.nvim_open_win(bufnr, enter, {
+--       style = "minimal",
+--       relative = "editor",
+--       width = width,
+--       height = height,
+--       row = row,
+--       col = col,
+--       border = "single",
+--       title = title,
+--     })
+--
+--     vim.wo[winid].winhighlight = "Normal:Normal"
+--
+--     return TSLayout.Window({
+--       bufnr = bufnr,
+--       winid = winid,
+--     })
+--   end
+--
+--   local function destory_window(window)
+--     if window then
+--       if vim.api.nvim_win_is_valid(window.winid) then
+--         vim.api.nvim_win_close(window.winid, true)
+--       end
+--       if vim.api.nvim_buf_is_valid(window.bufnr) then
+--         vim.api.nvim_buf_delete(window.bufnr, { force = true })
+--       end
+--     end
+--   end
+--
+--   local layout = TSLayout({
+--     picker = picker,
+--     mount = function(self)
+--       self.results = create_window(false, 40, 20, 0, 0, "Results")
+--       self.preview = create_window(false, 40, 23, 0, 42, "Preview")
+--       self.prompt = create_window(true, 40, 1, 22, 0, "Prompt")
+--     end,
+--     unmount = function(self)
+--       destory_window(self.results)
+--       destory_window(self.preview)
+--       destory_window(self.prompt)
+--     end,
+--     update = function(self) end,
+--   })
+--
+--   return layout
+-- end
+
 M.create_layout = function(picker)
-  local Layout = require "nui.layout"
+  local Layout = require("nui.layout")
 
   -- TODO: optimize this,
   -- either write all fields or clean up current one (remove dupes)
@@ -98,7 +149,7 @@ M.create_layout = function(picker)
     },
   }
 
-  local results = make_popup {
+  local results = make_popup({
     focusable = false,
     border = {
       style = border.results,
@@ -110,9 +161,9 @@ M.create_layout = function(picker)
     win_options = {
       winhighlight = "Normal:Normal",
     },
-  }
+  })
 
-  local prompt = make_popup {
+  local prompt = make_popup({
     enter = true,
     border = {
       style = border.prompt,
@@ -124,9 +175,9 @@ M.create_layout = function(picker)
     win_options = {
       winhighlight = "Normal:Normal",
     },
-  }
+  })
 
-  local preview = make_popup {
+  local preview = make_popup({
     focusable = false,
     border = {
       style = border.preview,
@@ -138,7 +189,7 @@ M.create_layout = function(picker)
     win_options = {
       winhighlight = "Normal:Normal",
     },
-  }
+  })
 
   local box_by_kind = {
     vertical = Layout.Box({
