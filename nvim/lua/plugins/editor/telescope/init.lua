@@ -1,14 +1,14 @@
-local util = require "plugins.editor.telescope.util"
-local actions = require "telescope.actions"
-local layout = require "telescope.actions.layout"
+local util = require("plugins.editor.telescope.util")
+local actions = require("telescope.actions")
+local layout = require("telescope.actions.layout")
 
 return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "MunifTanjim/nui.nvim",
-      require "plugins.editor.telescope.deps.telescope_undo",
-      require "plugins.editor.telescope.deps.telescope_live_greps_args",
+      require("plugins.editor.telescope.deps.telescope_undo"),
+      require("plugins.editor.telescope.deps.telescope_live_greps_args"),
     },
     keys = {
       { "<c-p>", util.find_files(), desc = "Find Files (root dir)" },
@@ -61,12 +61,14 @@ return {
       defaults = {
         winblend = 0,
         sorting_strategy = "ascending",
-        layout_strategy = "flex",
+        -- layout_strategy = "flex",
+        -- create_layout = require("plugins.editor.telescope.layout").create_layout,
+        layout_strategy = "bottom_pane",
         layout_config = {
-          horizontal = { size = { width = "100%", height = "60%" }},
-          vertical = { size = { width = "100%", height = "90%" }},
+          horizontal = { size = { width = "100%", height = "60%" } },
+          vertical = { size = { width = "100%", height = "90%" } },
+          bottom_pane = { height = 0.625 },
         },
-        create_layout = require("plugins.editor.telescope.layout").create_layout,
         mappings = {
           n = {
             ["<tab>"] = actions.move_selection_next,
