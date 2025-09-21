@@ -1,4 +1,4 @@
----@class UtilPkg
+---@class LibModules
 local M = {}
 
 function M.is_loaded(name)

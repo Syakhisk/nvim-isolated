@@ -1,2 +1,2 @@
-local specs = Util.loader.require_all(2)
+local specs = Lib.loader.require_all(2)
 return specs

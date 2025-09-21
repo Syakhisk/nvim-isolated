@@ -3,8 +3,8 @@ return {
     "nvim-telescope/telescope-live-grep-args.nvim",
     version = "^1.0.0",
     config = function()
-      Util.pkg.on_load("telescope.nvim", function()
-        require("telescope").load_extension "live_grep_args"
+      Lib.modules.on_load("telescope.nvim", function()
+        require("telescope").load_extension("live_grep_args")
       end)
     end,
     keys = {
@@ -22,7 +22,7 @@ return {
         "<leader>sv",
         "<cmd>lua require('telescope-live-grep-args.shortcuts').grep_visual_selection()<cr>",
         desc = "Live Grep Args - Visual Selection",
-        mode="v"
+        mode = "v",
       },
     },
   },

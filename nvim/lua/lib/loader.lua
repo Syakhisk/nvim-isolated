@@ -1,4 +1,4 @@
----@class UtilLoader
+---@class LibLoader
 local M = {}
 
 local get_caller_paths = function()
@@ -26,7 +26,7 @@ end
 -- will be converted to `modules/requireall`
 local filepath_to_modulename = function(filepath)
   local config_path = vim.fn.stdpath("config")
-  local modulename = Util.strings.replace(filepath, config_path, "") -- remove the prefix path
+  local modulename = Lib.strings.replace(filepath, config_path, "") -- remove the prefix path
   modulename = modulename:gsub("^/lua", "") -- remove the `/lua` prefix
   modulename = modulename:gsub(".lua$", "") -- remove the `.lua` suffix
   modulename = modulename:sub(2) -- remove the leading `/`

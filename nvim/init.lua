@@ -1,4 +1,4 @@
-_G.Util = require("util")
+_G.Lib = require("lib")
 
 require("config.options")
 require("config.lazy")
