@@ -1,0 +1,14 @@
+{
+  "return": ["return", "retun", "returm", "retuarn", "retuurn", "reutrn"],
+  "package": ["package", "pacakge", "packge", "packaeg", "packgae"],
+  "destination": ["destination", "destinatino", "destinaton", "destinatio"],
+  "should": ["should", "shuold", "shoudl", "shoud"],
+  "address": ["address", "addres", "adress", "adrees"],
+  "success": ["success", "sucess", "succes"],
+  "successful": ["successful", "sucessful", "succesful", "sucessfull"],
+  "successfully": ["successfully", "sucessfully", "succesfully"],
+  "mock": ["mock", "mokc", "mok"],
+  "mocks": ["mocks", "mokcs", "mokcs"],
+  "response": ["response", "resposne", "respnose"],
+  "responses": ["resposnes", "respnoses"]
+}
