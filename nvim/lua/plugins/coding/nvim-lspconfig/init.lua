@@ -2,51 +2,33 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "williamboman/mason.nvim", config = true },
-      "williamboman/mason-lspconfig.nvim",
+      { "mason-org/mason.nvim", opts = {} },
 
-      -- ensure_installed for all extensions (mason-lspconfig, mason-nvim-dap, etc)
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      -- auto install for lsps
+      { "mason-org/mason-lspconfig.nvim", opts = {
+        ensure_installed = { "lua_ls" },
+      } },
+
+      -- auto install for non-lsp tools e.g. golangci_lint, stylua, etc
+      { "WhoIsSethDaniel/mason-tool-installer.nvim", opts = {
+        ensure_installed = { "stylua" },
+      } },
 
       -- Loader UI indicator for LSP
       { "j-hui/fidget.nvim", opts = {} },
 
-      "hrsh7th/cmp-nvim-lsp",
+      -- "hrsh7th/cmp-nvim-lsp",
+      { "saghen/blink.cmp" },
     },
-    config = function()
-      -- LSP Server configurations (refer to nvim-lspconfig or each LSP docs for available values)
-      local servers = {
-        lua_ls = {},
-      }
-
-      -- Additional LSP/tools to install
-      local ensure_installed = vim.list_extend(vim.tbl_keys(servers or {}), {
-        "stylua",
-      })
-
-      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-      local capabilities = vim.tbl_deep_extend(
-        "force",
-        {},
-        vim.lsp.protocol.make_client_capabilities(),
-        has_cmp and cmp_nvim_lsp.default_capabilities() or {}
-      )
-
+    config = function(_, opts)
       require("plugins.coding.nvim-lspconfig.keymaps").setup_on_attach()
 
-      require("mason").setup()
-      require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-      require("mason-lspconfig").setup({
-        ensure_installed = {},
-        automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-            require("lspconfig")[server_name].setup(server)
-          end,
-        },
-      })
+      -- On Neovim 0.11+ with vim.lsp.config, you may skip this step. See nvim-lspconfig docs (https://cmp.saghen.dev/installation#lazy-nvim)
+      -- local lspconfig = require("lspconfig")
+      -- for server, config in pairs(opts.servers) do
+      --   config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+      --   lspconfig[server].setup(config)
+      -- end
     end,
   },
 }

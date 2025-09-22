@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   {
     "folke/tokyonight.nvim",
@@ -17,9 +18,9 @@ return {
     lazy = true,
     priority = 1000,
     config = function()
-      local fm = require "fluoromachine"
+      local fm = require("fluoromachine")
 
-      fm.setup {
+      fm.setup({
         transparent = true,
         -- brightness = 0.5,
         glow = false,
@@ -55,6 +56,17 @@ return {
             red = "#ed64c6",
           }
         end,
+      })
+    end,
+  },
+  {
+    "EdenEast/nightfox.nvim",
+    lazy = true,
+    opts = function(_, opts)
+      return {
+        options = {
+          transparent = true,
+        },
       }
     end,
   },

@@ -14,7 +14,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.cursorline = true
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "100"
 
 vim.opt.scrolloff = 10
@@ -30,7 +30,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 vim.opt.fillchars = {
   foldopen = "",
@@ -42,8 +42,10 @@ vim.opt.fillchars = {
 }
 
 vim.opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-vim.opt.winminwidth = 5       -- Minimum window width
-vim.opt.wrap = false          -- Disable line wrap
+vim.opt.winminwidth = 5 -- Minimum window width
+vim.opt.winborder = "rounded"
+-- vim.opt.winblend = 5
+vim.opt.wrap = false -- Disable line wrap
 
 vim.opt.inccommand = "nosplit"
 vim.opt.incsearch = true

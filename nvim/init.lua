@@ -5,5 +5,6 @@ require("config.options")
 require("config.lazy")
 require("config.keymaps")
 require("config.abbrevs")
+require("config.autocmds")
 
-vim.cmd.colorscheme("fluoromachine")
+vim.cmd.colorscheme("nightfox")

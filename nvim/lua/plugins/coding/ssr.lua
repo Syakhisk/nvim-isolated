@@ -23,6 +23,7 @@ return {
           require("ssr").open()
         end,
         desc = "Structural Search & Replace",
+        mode = { "v", "n" },
       },
     },
   },

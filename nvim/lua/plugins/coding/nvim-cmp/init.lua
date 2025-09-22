@@ -1,8 +1,10 @@
+--DEPRECATED
 local utils = require("plugins.coding.nvim-cmp.utils")
 
 return {
   {
     "hrsh7th/nvim-cmp",
+    enabled = false,
     event = "InsertEnter",
     dependencies = {
       {

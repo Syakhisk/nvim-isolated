@@ -13,7 +13,9 @@ local remove_defaults = function()
   }
 
   for _, v in pairs(maps) do
-    vim.keymap.del(v[1], v[2])
+    local _ = pcall(function()
+      vim.keymap.del(v[1], v[2])
+    end)
   end
 end
 
@@ -47,6 +49,7 @@ M.setup_on_attach = function()
       map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
       map("<C-S>", vim.lsp.buf.signature_help, "Signature help", { "i", "s" })
 
+      -- TODO: here
       -- map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
       -- map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
       -- map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
