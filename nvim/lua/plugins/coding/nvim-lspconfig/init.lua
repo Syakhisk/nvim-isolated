@@ -3,16 +3,7 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       { "mason-org/mason.nvim", opts = {} },
-
-      -- auto install for lsps
-      { "mason-org/mason-lspconfig.nvim", opts = {
-        ensure_installed = { "lua_ls" },
-      } },
-
-      -- auto install for non-lsp tools e.g. golangci_lint, stylua, etc
-      { "WhoIsSethDaniel/mason-tool-installer.nvim", opts = {
-        ensure_installed = { "stylua" },
-      } },
+      { "mason-org/mason-lspconfig.nvim", opts = {} },
 
       -- Loader UI indicator for LSP
       { "j-hui/fidget.nvim", opts = {} },
