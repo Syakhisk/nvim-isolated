@@ -1,51 +1,59 @@
-# BIG TODO: create proper todo list
-- create a grouping/categories for todo, assign priority
-- refactor the current todo, track progress from start to finish
-- prepare a place to put in a task that is discovered while doing other things
-- note: need this so that i can pickup/left this project whenever i'm free but not lost in the progress
-    - (use AI?)
+# Progress Tracker for Human
 
+## Tracker
+> line items tracker
 
-# TODO:
-- [x] telescope
-- [x] nvim-cmp
-- [x] comment
-- [x] format
-- [x] lazygit
-- [x] treesitter
-- [x] auto pairs
-- [ ] completion
-    - [ ] remove nvim-cmp files
-    - [ ] setup keymap (modified supertab)
-    - [x] signature help on blink
-- [ ] lsp on attaches (complete it)
-- [ ] diagnostics
-- [ ] yank highlight
+### TODO
+- [~] Markdown
+    - [ ] markdown renderer (neovim+concealls+hlgroup)
+        - [x] reduce blinking, is it possible to keep rendering logic on in insert mode while excluding current line (similar to conceal)
+        - [ ] headings
+    - [ ] markdown formatter
+    - [ ] keymap related to markdown plugins?
+
+### Backlog
+- [ ] Spelling
+    - Use LSP / nvim native to check for spelling in files
+    - See if cased word can be checked as well (e.g. camelcase, pascalcase, etc)
+- [ ] Keymaps
+    - LazyVim :nohl binds to remove highlights
+- [ ] UI improvements
+    - Uniformize UI definitions so that plugins can use it (e.g. telescope, neotree, fidget)
+- [ ] Buffer management
+    - Buffer list
+    - Remove multiple buffer (close others, close to left/right)
+- [ ] LSP
+    - Diagnostics
+    - Finish work on keymaps (on attach)
 - [ ] AI
-- [ ] popup cmdline
-- [ ] popup confirmation
-- [ ] buffer
-    - buffer keymaps (bo, bl, bL, etc)
-    - list
+    - Copilot completion
+    - Copilot chat
+        - Try to mimic vscode copilot chat (models, copilot-instructions.md, etc.)
 
-# Low Prio:
-- [ ] Simple dashboard
-- [ ] Remove unneeded preview in telescope
-- [ ] Notifier
-- [ ] blink.cmp ui adjustment
-- [ ] simple dap viewer (see reddit)
-- [ ] UI theming
-    - refactor telescope ui to reuse globals or colors util
-    - neotree
+### Done
 
-- [ ] Put "lazy" in plugins that you don't want to setup directly
-- [ ] status bar
-- [ ] make recording indicator more prominent
-- [ ] lsp for spelling?
+## Plugin Candidates
+> plugins that needs to be installed OR considered to be installed
 
-# Quirks:
-- [ ] Sometimes, telescope file pickers will jump to insert mode
-- [ ] add autocommand to do lsp stuff when moving/renaming files using neo-tree
+- [ ] folke/flash.nvim
+    - multichars jumps throughout windows (code navigation on steroid )
+- [ ] aerial.nvim
+    - plugins for LSP symbols outline
+    - my usecase: better lsp_document_symbols as it highlights nearest function from cursor instead of top-bottom
+- [ ] folke/trouble.nvim
+    - better qflist / lists in general
+    - my usecase: see if it's possible / make sense to replace default qflist with trouble
+- [ ] SchemaStore.nvim
+    - json schema to accompany lsps for json, yaml, etc. so that it provides autocompletes if schema is present online (e.g. for docker-compose, etc.)
 
-# Small items:
-- [ ] Yank to system clipboard
+## Floating ideas/concepts
+> one-liner (or more) ideas that is came up. If the task is complex, might need to move the line items to tracker section
+
+### Core
+- DAP debugger UI #test-debug
+- Neotest + Neotests-golang
+
+### QoL
+- create comands / keymap to build CLI test commands from nearest test to cursor
+
+### Nice-to-haves
