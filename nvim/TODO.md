@@ -6,14 +6,18 @@
 
 ### Active
 
+- [ ] Buffer management
+  - Buffer list
+  - Remove multiple buffer (close others, close to left/right)
+
+- [ ] Keymaps
+  - see Keymaps section at the bottom
+
 ### Backlog
 
 - [ ] Spelling
   - Use LSP / nvim native to check for spelling in files
   - See if cased word can be checked as well (e.g. camelcase, pascalcase, etc)
-
-- [ ] Keymaps
-  - LazyVim :nohl binds to remove highlights
 
 - [ ] UI improvements
   - Indent blanklines (use snacks?)
@@ -26,10 +30,6 @@
     - macro recording indicator
     - background job indicator (markdown preview, dap attach)
   - Uniformize UI definitions so that plugins can use it (e.g. telescope, neotree, fidget)
-
-- [ ] Buffer management
-  - Buffer list
-  - Remove multiple buffer (close others, close to left/right)
 
 - [ ] LSP
   - Diagnostics
@@ -62,6 +62,8 @@
   - my usecase: see if it's possible / make sense to replace default qflist with trouble
 - [ ] SchemaStore.nvim
   - json schema to accompany lsps for json, yaml, etc. so that it provides autocompletes if schema is present online (e.g. for docker-compose, etc.)
+- [ ] folke/snacks.nvim
+  - QoL plugins for nvim, e.g. renamer, indent blankline, buffer management, etc.
 
 ## Floating ideas/concepts
 
@@ -77,3 +79,9 @@
 - create comands / keymap to build CLI test commands from nearest test to cursor
 
 ### Nice-to-haves
+
+### Keymaps
+
+- [x] LazyVim :nohl binds to remove highlights
+- [ ] `cia` change inner arguments + other treesitter wise keymaps
+- [ ] `<leader>cr` LSP rename
