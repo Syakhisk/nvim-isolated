@@ -4,36 +4,49 @@
 
 > line items tracker
 
-### TODO
-
-- [~] Markdown
-  - [x] markdown renderer (neovim+concealls+hlgroup)
-    - [x] reduce blinking, is it possible to keep rendering logic on in insert mode while excluding current line (similar to conceal)
-    - [x] headings UI adjustment
-  - [x] markdown formatter
-  - [ ] keymap related to markdown plugins?
+### Active
 
 ### Backlog
 
 - [ ] Spelling
   - Use LSP / nvim native to check for spelling in files
   - See if cased word can be checked as well (e.g. camelcase, pascalcase, etc)
+
 - [ ] Keymaps
   - LazyVim :nohl binds to remove highlights
+
 - [ ] UI improvements
+  - Indent blanklines (use snacks?)
+  - Dashboard
+  - Popup Notifier
+    - Regular msg / notification
+    - Confirmation dialog on load file, confirm exit/save, etc
+  - Popup Cmdline
+  - Statusbar
+    - macro recording indicator
+    - background job indicator (markdown preview, dap attach)
   - Uniformize UI definitions so that plugins can use it (e.g. telescope, neotree, fidget)
+
 - [ ] Buffer management
   - Buffer list
   - Remove multiple buffer (close others, close to left/right)
+
 - [ ] LSP
   - Diagnostics
   - Finish work on keymaps (on attach)
+
 - [ ] AI
   - Copilot completion
   - Copilot chat
     - Try to mimic vscode copilot chat (models, copilot-instructions.md, etc.)
 
 ### Done
+
+- [~] Markdown
+  - [x] markdown renderer (neovim+concealls+hlgroup)
+    - [x] reduce blinking, is it possible to keep rendering logic on in insert mode while excluding current line (similar to conceal)
+    - [x] headings UI adjustment
+  - [x] markdown formatter
 
 ## Plugin Candidates
 

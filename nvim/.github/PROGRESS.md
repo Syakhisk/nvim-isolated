@@ -53,17 +53,30 @@
 - [ ] **Buffer Management** - Buffer keymaps (bo, bl, bL, etc) and listing
 
 ### UI Enhancements
-- [ ] **AI Integration** - Copilot or similar AI completion
-- [ ] **Popup UI** - Command line and confirmation popups
-- [ ] **Status Bar** - Custom status line configuration
+- [ ] **AI Integration** - Copilot completion and chat (mimicking vscode copilot chat with models, copilot-instructions.md)
+- [ ] **Popup UI** - Command line and confirmation popups (confirmation dialog on load file, confirm exit/save)
+- [ ] **Status Bar** - Custom status line with macro recording indicator and background job indicator
+- [ ] **Dashboard** - Simple startup dashboard
+- [ ] **Popup Notifier** - Regular msg/notification system
+
+### Core Tools
+- [ ] **Buffer Management** - Buffer list, close operations (close others, close to left/right)
+- [ ] **Spelling System** - LSP/nvim native spelling checks including camelCase/PascalCase words
+- [ ] **Keymaps Enhancement** - LazyVim :nohl binds to remove highlights
 
 ## 🔮 Future Enhancements (Low Priority)
 
 ### Quality of Life
-- [ ] **Dashboard** - Simple startup dashboard
-- [ ] **Notifications** - Better notification system
-- [ ] **UI Theming** - Refactor telescope UI to reuse globals/colors util
-- [ ] **DAP Viewer** - Simple debug adapter protocol viewer
+- [ ] **UI Theming** - Refactor telescope UI to reuse globals/colors util, uniformize UI definitions for plugins
+- [ ] **DAP Viewer** - Simple debug adapter protocol viewer and debugger UI
+- [ ] **Neotest Integration** - Test framework with Neotest + Neotests-golang
+- [ ] **CLI Test Commands** - Commands/keymaps to build CLI test commands from nearest test to cursor
+
+### Plugin Candidates (Under Evaluation)
+- [ ] **Flash.nvim** - Multi-char jumps throughout windows for enhanced code navigation
+- [ ] **Aerial.nvim** - LSP symbols outline with nearest function highlighting from cursor
+- [ ] **Trouble.nvim** - Enhanced quickfix list and better list management in general  
+- [ ] **SchemaStore.nvim** - JSON/YAML schema support for LSPs (docker-compose, etc.)
 
 ### Development Tools
 - [ ] **Recording Indicator** - More prominent macro recording indicator  

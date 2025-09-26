@@ -116,7 +116,7 @@ Use this prompt to update progress: `"Update .github/PROGRESS.md based on recent
 
 ## TODO Management
 - **Primary**: `.github/PROGRESS.md` tracks current development status with priority levels
-- **Legacy**: `TODO.md` contains historical items (reference for context only)
+- **Legacy**: `TODO.md` contains historical items (reference for context only) DO NOT MODIFY TODO.md directly, prompt user to update TODO.md if there are any discrepancies
 - **Current focus**: Completing blink.cmp migration, LSP setup, diagnostics
 - **Code TODOs**: Address inline TODO comments when working on related features
 
