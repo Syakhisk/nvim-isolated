@@ -1,4 +1,4 @@
----@class LibGlobals
+---@class LibHelpers
 local M = {}
 
 --- Get the Neovim configuration path
@@ -123,4 +123,3 @@ M.nvim_version_check = function(min_version)
 end
 
 return M
-

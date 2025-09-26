@@ -1,5 +1,5 @@
 _G.Lib = require("lib")
-_G.Globals = require("lib.globals")
+_G.H = require("lib.helpers")
 
 require("config.options")
 require("config.lazy")

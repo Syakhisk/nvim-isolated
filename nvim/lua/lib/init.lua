@@ -4,7 +4,7 @@
 ---@field strings LibStrings
 ---@field loader LibLoader
 ---@field formatter LibFormatter
----@field globals LibGlobals
+---@field helpers LibHelpers
 local M = {}
 
 setmetatable(M, {
