@@ -1,10 +1,9 @@
 ---@class Lib
 ---@field log LibLog
----@field modules LibModules
+---@field plugins LibPlugins
 ---@field strings LibStrings
----@field loader LibLoader
 ---@field formatter LibFormatter
----@field helpers LibHelpers
+---@field constants LibConstants
 local M = {}
 
 setmetatable(M, {

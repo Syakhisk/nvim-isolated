@@ -6,9 +6,21 @@
 
 ### Active
 
-- [ ] Buffer management
+- [ ] LazySpec auto file template
+  - use autocommands
+- [ ] Statusline
+- [~] Buffer management
   - Buffer list
   - Remove multiple buffer (close others, close to left/right)
+  - ideas:
+    - use window position to sort buffer (left buffer should be moved left, etc)
+    - or, each window has separate bufferlist (see if this possible)
+    - experiment between buflist and buffer statusbar
+  - Plugin candidate:
+    - EL-MASTOR/bufferlist.nvim
+    - francescarpi/buffon.nvim
+    - romgrk/barbar.nvim
+    - akinsho/bufferline.nvim
 
 - [ ] Keymaps
   - see Keymaps section at the bottom
@@ -33,7 +45,6 @@
 
 - [ ] LSP
   - Diagnostics
-  - Finish work on keymaps (on attach)
 
 - [ ] AI
   - Copilot completion
@@ -52,6 +63,7 @@
 
 > plugins that needs to be installed OR considered to be installed
 
+- [ ] tpope/abolish.vim
 - [ ] folke/flash.nvim
   - multichars jumps throughout windows (code navigation on steroid )
 - [ ] aerial.nvim
@@ -64,23 +76,31 @@
   - json schema to accompany lsps for json, yaml, etc. so that it provides autocompletes if schema is present online (e.g. for docker-compose, etc.)
 - [ ] folke/snacks.nvim
   - QoL plugins for nvim, e.g. renamer, indent blankline, buffer management, etc.
+- [ ] ofirgall/open.nvim
+  - open shorthand, can be customized (e.g. create custom opener for file to be opened in jetbrains)
+- [ ] lewis6991/gitsigns.nvim
+  - git related info, try configuring it
 
 ## Floating ideas/concepts
 
 > one-liner (or more) ideas that is came up. If the task is complex, might need to move the line items to tracker section
 
-### Core
+### Things
 
+- Automate file template if creating new file in plugins/ folder (add lazyspec type and return a table)
 - DAP debugger UI #test-debug
 - Neotest + Neotests-golang
-
-### QoL
-
 - create comands / keymap to build CLI test commands from nearest test to cursor
-
-### Nice-to-haves
+- multicursors????
+- session save (what to save on close)
 
 ### Keymaps
+
+NOTE:
+
+> Should plugin keymaps be placed in plugin specs or keymaps.lua?
+>
+> - if yes, need a way to check if plugins is installed, use lazy methods or create util function
 
 - [x] LazyVim :nohl binds to remove highlights
 - [ ] `cia` change inner arguments + other treesitter wise keymaps

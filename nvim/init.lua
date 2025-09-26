@@ -1,8 +1,11 @@
 _G.Lib = require("lib")
-_G.H = require("lib.helpers")
 
 require("config.options")
 require("config.lazy")
+if Lib.plugins.has("snacks") then
+  _G.Snacks = require("snacks")
+end
+
 require("config.keymaps")
 require("config.abbrevs")
 require("config.autocmds")

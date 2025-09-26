@@ -1,4 +1,5 @@
 local u = require("config.keymaps.util")
+local tmux = require("pkg.tmux")
 
 local map = vim.keymap.set
 
@@ -7,10 +8,10 @@ map({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy from system clipboard" })
 map({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
 
 -- Tmux integration, fallback tmux navigation if nvim split is on edge
-map("n", "<c-w>h", require("pkg.tmux").navigate("h"))
-map("n", "<c-w>j", require("pkg.tmux").navigate("j"))
-map("n", "<c-w>k", require("pkg.tmux").navigate("k"))
-map("n", "<c-w>l", require("pkg.tmux").navigate("l"))
+map("n", "<c-w>h", tmux.navigate("h"))
+map("n", "<c-w>j", tmux.navigate("j"))
+map("n", "<c-w>k", tmux.navigate("k"))
+map("n", "<c-w>l", tmux.navigate("l"))
 
 -- Save
 map("n", "<leader><space>", vim.cmd.w, { desc = "Save file" })
@@ -82,7 +83,6 @@ map("n", "]e", u.diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
 map("n", "[e", u.diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", u.diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", u.diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
-
 
 -- TODO: this is copied from lazyvim, pick and choose needed ones
 -- -- This file is automatically loaded by lazyvim.config.init

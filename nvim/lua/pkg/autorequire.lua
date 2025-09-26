@@ -1,4 +1,4 @@
----@class LibLoader
+---@class AutoRequire
 local M = {}
 
 local get_caller_paths = function()

@@ -1,3 +1,4 @@
+---@class Tmux
 local M = {}
 
 local TMUX_DIR_MAP = {
@@ -17,7 +18,7 @@ end
 
 ---@return function
 -- @usage
--- vim.keymap.set("n", "<c-w>h", require("util.tmux").navigate "h")
+-- vim.keymap.set("n", "<c-w>h", Lib.tmux.navigate "h")
 M.navigate = function(direction)
   return function()
     local is_tmux = check_tmux()

@@ -1,4 +1,4 @@
----@class LibModules
+---@class LibPlugins
 local M = {}
 
 function M.is_loaded(name)
@@ -22,6 +22,24 @@ function M.on_load(name, fn)
       end,
     })
   end
+end
+
+---@param name string
+function M.get(name)
+  return require("lazy.core.config").spec.plugins[name]
+end
+
+---@param name string
+---@param path string?
+function M.get_path(name, path)
+  local plugin = M.get(name)
+  path = path and "/" .. path or ""
+  return plugin and (plugin.dir .. path)
+end
+
+---@param plugin string
+function M.has(plugin)
+  return M.get(plugin) ~= nil
 end
 
 return M
