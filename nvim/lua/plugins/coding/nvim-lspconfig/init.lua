@@ -1,6 +1,8 @@
+---@type LazySpec
 return {
   {
     "neovim/nvim-lspconfig",
+    version = "v2.*",
     dependencies = {
       { "mason-org/mason.nvim", opts = {} },
       { "mason-org/mason-lspconfig.nvim", opts = {} },
