@@ -6,8 +6,6 @@
 
 ### Active
 
-- [ ] LazySpec auto file template
-  - use autocommands
 - [ ] Statusline
 - [~] Buffer management
   - Buffer list
@@ -53,7 +51,10 @@
 
 ### Done
 
-- [~] Markdown
+- [x] LazySpec auto file template
+  - use autocommands
+
+- [x] Markdown
   - [x] markdown renderer (neovim+concealls+hlgroup)
     - [x] reduce blinking, is it possible to keep rendering logic on in insert mode while excluding current line (similar to conceal)
     - [x] headings UI adjustment
@@ -87,7 +88,6 @@
 
 ### Things
 
-- Automate file template if creating new file in plugins/ folder (add lazyspec type and return a table)
 - DAP debugger UI #test-debug
 - Neotest + Neotests-golang
 - create comands / keymap to build CLI test commands from nearest test to cursor
@@ -102,6 +102,7 @@ NOTE:
 >
 > - if yes, need a way to check if plugins is installed, use lazy methods or create util function
 
-- [x] LazyVim :nohl binds to remove highlights
 - [ ] `cia` change inner arguments + other treesitter wise keymaps
 - [ ] `<leader>cr` LSP rename
+- [ ] folding
+- [x] LazyVim :nohl binds to remove highlights

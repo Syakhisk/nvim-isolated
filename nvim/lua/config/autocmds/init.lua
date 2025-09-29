@@ -46,14 +46,6 @@ autocmd("FileType", {
   end,
 })
 
--- TODO: is this needed?
--- -- Highlight trailing whitespace except in certain file types
--- autocmd({ "FileType", "InsertEnter", "InsertLeave" }, {
---   group = augroup("trailing_whitespace"),
---   pattern = { "*" },
---   callback = require("config.autocmds.trailing_whitespace").callback,
--- })
-
 -- Check if we need to reload the file when it changed
 autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
@@ -166,3 +158,31 @@ autocmd({ "BufWritePre" }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
+
+autocmd({ "BufNewFile", "BufEnter" }, {
+  group = augroup("lazy_spec_template"),
+  pattern = { "*/lua/plugins/*.lua" },
+  callback = function(args)
+    local bufnr = args.buf
+    -- only act if buffer is empty
+    if vim.api.nvim_buf_line_count(bufnr) == 1 and vim.api.nvim_buf_get_lines(bufnr, 0, 1, false)[1] == "" then
+      local template = vim.fn.stdpath("config") .. "/.templates/lazy_spec.lua"
+
+      local ok = pcall(vim.cmd, "0r " .. template)
+      if not ok then
+        vim.notify("Lazyspec file not found", vim.log.levels.WARN)
+        return
+      end
+
+      vim.notify("Inserted lazy spec template into " .. args.file)
+    end
+  end,
+})
+
+-- TODO: is this needed?
+-- -- Highlight trailing whitespace except in certain file types
+-- autocmd({ "FileType", "InsertEnter", "InsertLeave" }, {
+--   group = augroup("trailing_whitespace"),
+--   pattern = { "*" },
+--   callback = require("config.autocmds.trailing_whitespace").callback,
+-- })
