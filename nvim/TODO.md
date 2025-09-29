@@ -29,6 +29,9 @@
   - Use LSP / nvim native to check for spelling in files
   - See if cased word can be checked as well (e.g. camelcase, pascalcase, etc)
 
+- [ ] nvim-lint
+  - is it needed?
+
 - [ ] UI improvements
   - Indent blanklines (use snacks?)
   - Dashboard
@@ -64,7 +67,6 @@
 
 > plugins that needs to be installed OR considered to be installed
 
-- [ ] tpope/abolish.vim
 - [ ] folke/flash.nvim
   - multichars jumps throughout windows (code navigation on steroid )
 - [ ] aerial.nvim
@@ -81,6 +83,7 @@
   - open shorthand, can be customized (e.g. create custom opener for file to be opened in jetbrains)
 - [ ] lewis6991/gitsigns.nvim
   - git related info, try configuring it
+- [x] tpope/abolish.vim
 
 ## Floating ideas/concepts
 
@@ -88,6 +91,7 @@
 
 ### Things
 
+- auto root + keymap to change root back to project
 - DAP debugger UI #test-debug
 - Neotest + Neotests-golang
 - create comands / keymap to build CLI test commands from nearest test to cursor
@@ -103,6 +107,7 @@ NOTE:
 > - if yes, need a way to check if plugins is installed, use lazy methods or create util function
 
 - [ ] `cia` change inner arguments + other treesitter wise keymaps
+- [ ] `vaq` select outer quotes
 - [ ] `<leader>cr` LSP rename
 - [ ] folding
 - [x] LazyVim :nohl binds to remove highlights
