@@ -2,6 +2,7 @@
 return {
   {
     "folke/tokyonight.nvim",
+    version = "v4.*",
     lazy = true,
     priority = 1000,
     opts = {

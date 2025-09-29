@@ -1,5 +1,7 @@
+---@type LazySpec
 return {
   "stevearc/conform.nvim",
+  version = "v9.*",
   ---@type conform.setupOpts
   opts = {
     default_format_opts = {
