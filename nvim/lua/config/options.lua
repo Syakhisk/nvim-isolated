@@ -9,6 +9,7 @@ vim.opt.number = true
 vim.opt.mouse = "a"
 
 vim.opt.showmode = false
+vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true

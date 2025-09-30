@@ -67,6 +67,7 @@
 
 > plugins that needs to be installed OR considered to be installed
 
+- [ ] https://github.com/hangyav/textLSP
 - [ ] folke/flash.nvim
   - multichars jumps throughout windows (code navigation on steroid )
 - [ ] aerial.nvim
