@@ -1,5 +1,6 @@
-local util = require "plugins.editor.neo-tree.util"
+local util = require("plugins.editor.neo-tree.util")
 
+---@type LazySpec
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
@@ -9,6 +10,7 @@ return {
     "MunifTanjim/nui.nvim",
     -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
   },
+  cmd = { "Neotree" },
   init = util.init_fn,
   opts = {
     close_if_last_window = true,
@@ -97,9 +99,22 @@ return {
       },
     },
   },
-  cmd = { "Neotree" },
   keys = {
     { "<leader>e", "<cmd>Neotree toggle reveal=true position=float<cr>", desc = "Toggle NeoTree" },
     { "<leader>E", "<cmd>Neotree toggle reveal=true position=right<cr>", desc = "Toggle NeoTree (Left)" },
   },
+  config = function(_, opts)
+    local function on_move(data)
+      Snacks.rename.on_rename_file(data.source, data.destination)
+    end
+
+    local events = require("neo-tree.events")
+    opts.event_handlers = opts.event_handlers or {}
+    vim.list_extend(opts.event_handlers, {
+      { event = events.FILE_MOVED, handler = on_move },
+      { event = events.FILE_RENAMED, handler = on_move },
+    })
+
+    require("neo-tree").setup(opts)
+  end,
 }

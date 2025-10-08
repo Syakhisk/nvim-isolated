@@ -92,6 +92,7 @@
 
 ### Things
 
+- show notification while running long tasks, e.g. conform / lsp formatting (useful in golang while fixing import)
 - auto root + keymap to change root back to project
 - DAP debugger UI #test-debug
 - Neotest + Neotests-golang

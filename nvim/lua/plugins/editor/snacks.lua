@@ -4,7 +4,12 @@ return {
   version = "v2.*",
   priority = 1000,
   lazy = false,
-  opts = {},
+  ---@type snacks.Config
+  opts = {
+    indent = {
+      enabled = true,
+    },
+  },
   keys = function()
     local snacks = require("snacks")
     return {
