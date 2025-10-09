@@ -5,11 +5,17 @@ return {
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate",
+    version = "v2.*",
 
     -- Extend mason to allow ensure_installed options
     opts_extend = { "ensure_installed" },
     opts = {
-      ensure_installed = { "stylua", "shfmt" },
+      ensure_installed = {
+        "stylua",
+        "shfmt",
+        "hadolint",
+        "cspell",
+      },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
     config = function(_, opts)

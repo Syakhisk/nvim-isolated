@@ -6,6 +6,15 @@
 
 ### Active
 
+- [ ] Keymaps
+  - see Keymaps section at the bottom
+
+### Backlog
+
+- [ ] Spelling
+  - Use LSP / nvim native to check for spelling in files
+  - See if cased word can be checked as well (e.g. camelcase, pascalcase, etc)
+
 - [ ] Statusline
 - [~] Buffer management
   - Buffer list
@@ -20,29 +29,17 @@
     - romgrk/barbar.nvim
     - akinsho/bufferline.nvim
 
-- [ ] Keymaps
-  - see Keymaps section at the bottom
-
-### Backlog
-
-- [ ] Spelling
-  - Use LSP / nvim native to check for spelling in files
-  - See if cased word can be checked as well (e.g. camelcase, pascalcase, etc)
-
-- [ ] nvim-lint
-  - is it needed?
-
 - [ ] UI improvements
-  - Indent blanklines (use snacks?)
   - Dashboard
-  - Popup Notifier
-    - Regular msg / notification
-    - Confirmation dialog on load file, confirm exit/save, etc
-  - Popup Cmdline
   - Statusbar
     - macro recording indicator
     - background job indicator (markdown preview, dap attach)
   - Uniformize UI definitions so that plugins can use it (e.g. telescope, neotree, fidget)
+  - [x] Indent blanklines (use snacks?)
+  - [x] Popup Notifier
+    - Regular msg / notification
+    - Confirmation dialog on load file, confirm exit/save, etc
+  - [x] Popup Cmdline
 
 - [ ] LSP
   - Diagnostics
@@ -52,22 +49,15 @@
   - Copilot chat
     - Try to mimic vscode copilot chat (models, copilot-instructions.md, etc.)
 
-### Done
-
-- [x] LazySpec auto file template
-  - use autocommands
-
-- [x] Markdown
-  - [x] markdown renderer (neovim+concealls+hlgroup)
-    - [x] reduce blinking, is it possible to keep rendering logic on in insert mode while excluding current line (similar to conceal)
-    - [x] headings UI adjustment
-  - [x] markdown formatter
+- [ ] nvim-lint
+  - is it needed?
 
 ## Plugin Candidates
 
 > plugins that needs to be installed OR considered to be installed
 
 - [ ] https://github.com/hangyav/textLSP
+  - for spelling
 - [ ] folke/flash.nvim
   - multichars jumps throughout windows (code navigation on steroid )
 - [ ] aerial.nvim
@@ -113,3 +103,14 @@ NOTE:
 - [ ] `<leader>cr` LSP rename
 - [ ] folding
 - [x] LazyVim :nohl binds to remove highlights
+
+### Done
+
+- [x] LazySpec auto file template
+  - use autocommands
+
+- [x] Markdown
+  - [x] markdown renderer (neovim+concealls+hlgroup)
+    - [x] reduce blinking, is it possible to keep rendering logic on in insert mode while excluding current line (similar to conceal)
+    - [x] headings UI adjustment
+  - [x] markdown formatter
