@@ -2,9 +2,11 @@ local util = require("plugins.editor.telescope.util")
 local actions = require("telescope.actions")
 local layout = require("telescope.actions.layout")
 
+---@type LazySpec
 return {
   {
     "nvim-telescope/telescope.nvim",
+    -- version = false,
     dependencies = {
       "MunifTanjim/nui.nvim",
       require("plugins.editor.telescope.deps.telescope_undo"),

@@ -84,6 +84,8 @@ map("n", "[e", u.diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", u.diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", u.diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
+--- END
+
 -- TODO: this is copied from lazyvim, pick and choose needed ones
 -- -- This file is automatically loaded by lazyvim.config.init
 --

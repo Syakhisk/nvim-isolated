@@ -15,13 +15,15 @@ return {
       },
       render_modes = { "n", "c", "t", "i" },
       heading = {
-        border = { false },
+        border = { true, false },
+        border_virtual = true,
 
         position = "inline",
-        left_pad = { 2, 4, 6, 8 },
+        left_pad = {1},
+        right_pad = {2},
 
         width = { "full", "block" },
-        min_width = { 0, 90, 60, 30 },
+        min_width = { 0, 90, 10 },
 
         sign = true,
 
