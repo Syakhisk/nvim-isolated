@@ -55,27 +55,6 @@ return {
         end,
       })
     end,
-    keys = {
-      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-      { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-      { "<c-s-h>", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer previous" },
-      { "<c-s-l>", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
-      { "<leader>b0", "<cmd>BufferLineTogglePin<cr>", desc = "Toggle pin" },
-      { "<leader>bH", "<cmd>BufferLineCloseLeft<cr>", desc = "Close buffer to the left" },
-      { "<leader>bL", "<cmd>BufferLineCloseRight<cr>", desc = "Close buffer to the right" },
-      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
-      { "<leader>bS", "<cmd>BufferLineSortByDirectory<cr>", desc = "Sort buffer by directory" },
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
-      { "<leader>bp", "<cmd>BufferLinePick<cr>", desc = "Pick buffer" },
-      { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
-      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-      { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
-      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-      -- stylua: ignore
-      { "<leader>bd", function() require("snacks").bufdelete() end, desc = "Delete Buffer" },
-      -- stylua: ignore
-      { "<leader>bo", function() require("snacks").bufdelete.other() end, desc = "Delete Other Buffers" },
-    },
   },
   {
     -- Scope buffers to tab

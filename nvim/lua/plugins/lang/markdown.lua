@@ -19,8 +19,8 @@ return {
         border_virtual = true,
 
         position = "inline",
-        left_pad = {1},
-        right_pad = {2},
+        left_pad = { 1 },
+        right_pad = { 2 },
 
         width = { "full", "block" },
         min_width = { 0, 90, 10 },
@@ -95,16 +95,9 @@ return {
       require("lazy").load({ plugins = { "markdown-preview.nvim" } })
       vim.fn["mkdp#util#install"]()
     end,
-    keys = {
-      {
-        "<leader>cp",
-        ft = "markdown",
-        "<cmd>MarkdownPreviewToggle<cr>",
-        desc = "Markdown Preview",
-      },
-    },
-    config = function()
-      vim.cmd([[do FileType]])
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
     end,
+    ft = { "markdown" },
   },
 }

@@ -16,15 +16,5 @@ return {
         replace_all = "<leader><cr>",
       },
     },
-    keys = {
-      {
-        "<leader>sr",
-        function()
-          require("ssr").open()
-        end,
-        desc = "Structural Search & Replace",
-        mode = { "v", "n" },
-      },
-    },
   },
 }

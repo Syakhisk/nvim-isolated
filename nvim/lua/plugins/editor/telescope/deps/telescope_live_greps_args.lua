@@ -7,6 +7,7 @@ return {
         require("telescope").load_extension("live_grep_args")
       end)
     end,
+    -- TODO: keymaps here
     keys = {
       {
         "<leader>sg",

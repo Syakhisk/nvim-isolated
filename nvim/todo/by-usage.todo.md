@@ -2,18 +2,22 @@
 
 ## P0
 
-| done | summary                             | effort | id  |
-| ---- | ----------------------------------- | ------ | --- |
-|      | [chore] keymap silence notification | 1 🟩   |     |
-|      | [chore] colocate keymap to a file   | 2 🟨   |     |
-|      | [dash] session save                 | 2 🟨   |     |
-|      | [dash] dashboard                    | 2 🟨   |     |
-|      | [spell] subtle underline            | 2 🟨   |     |
-|      | [test] neotest                      | 3 🟥   |     |
-|      | [git] gitsigns                      | 3 🟥   |     |
-|      | [spell] code-action                 | 3 🟥   |     |
-| x    | [lint] linting with progress        | 2 🟨   |     |
-|      |                                     | 1 🟩   |     |
+| done | summary                                         | effort | id  |
+| ---- | ----------------------------------------------- | ------ | --- |
+|      | [keymap] colocate keymaps for telescope plugisn | 2 🟨   |     |
+|      | [keymap] copy maps from current dotfiles        | 2 🟨   |     |
+|      | [keymap] keymap silence notification            | 1 🟩   |     |
+|      | [format] format with progress                   | 2 🟨   |     |
+|      | [dash] dashboard                                | 2 🟨   |     |
+|      | [dash] session save                             | 2 🟨   |     |
+|      | [spell] subtle underline                        | 2 🟨   |     |
+|      | [test] neotest                                  | 3 🟥   |     |
+|      | [git] gitsigns                                  | 3 🟥   |     |
+|      | [spell] code-action                             | 3 🟥   |     |
+|      | [ui] code-action option use popup               | 1 🟩   |     |
+|      |                                                 | 1 🟩   |     |
+| x    | [lint] linting with progress                    | 2 🟨   |     |
+| x    | [keymap] colocate keymap to a file              | 2 🟨   |     |
 
 ## P1
 

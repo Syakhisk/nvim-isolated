@@ -99,10 +99,6 @@ return {
       },
     },
   },
-  keys = {
-    { "<leader>e", "<cmd>Neotree toggle reveal=true position=float<cr>", desc = "Toggle NeoTree" },
-    { "<leader>E", "<cmd>Neotree toggle reveal=true position=right<cr>", desc = "Toggle NeoTree (Left)" },
-  },
   config = function(_, opts)
     local function on_move(data)
       Snacks.rename.on_rename_file(data.source, data.destination)
