@@ -1,5 +1,3 @@
--- TODO: move lsp keymap to this folder?
-
 local u = require("config.keymaps.util")
 local tmux = require("pkg.tmux")
 
@@ -32,7 +30,7 @@ map("n", "<leader>/", "gcc", { desc = "Toggle comments", remap = true })
 map("v", "<leader>/", "gc", { desc = "Toggle comments", remap = true })
 
 -- Format
-map({ "n", "v" }, "<leader>lf", Lib.formatter.format, { desc = "Format file" })
+map({ "n", "v" }, "<leader>lf", u.bufferFormat, { desc = "Format file" })
 
 -- Select pasted text
 map("n", "gV", "`[v`]", { desc = "Select last pasted text" })
@@ -194,24 +192,28 @@ u.with("snacks", function(snacks)
   u.map("<leader>bd", snacks.bufdelete.delete, { desc = "Delete Buffer" })
   u.map("<leader>bo", snacks.bufdelete.other, { desc = "Delete Other Buffers" })
 
-  Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
-  Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-  Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-  Snacks.toggle.diagnostics():map("<leader>ud")
-  Snacks.toggle.line_number():map("<leader>ul")
-  Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
-  Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" }):map("<leader>uA")
-  Snacks.toggle.treesitter():map("<leader>uT")
-  Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
-  Snacks.toggle.dim():map("<leader>uD")
-  Snacks.toggle.animate():map("<leader>ua")
-  Snacks.toggle.indent():map("<leader>ug")
-  Snacks.toggle.scroll():map("<leader>uS")
-  Snacks.toggle.profiler():map("<leader>dpp")
-  Snacks.toggle.profiler_highlights():map("<leader>dph")
+  u.map("<leader>un", function()
+    snacks.notifier.hide()
+  end, { desc = "Dismiss All Notifications" })
+
+  snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+  snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+  snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+  snacks.toggle.diagnostics():map("<leader>ud")
+  snacks.toggle.line_number():map("<leader>ul")
+  snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
+  snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" }):map("<leader>uA")
+  snacks.toggle.treesitter():map("<leader>uT")
+  snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+  snacks.toggle.dim():map("<leader>uD")
+  snacks.toggle.animate():map("<leader>ua")
+  snacks.toggle.indent():map("<leader>ug")
+  snacks.toggle.scroll():map("<leader>uS")
+  snacks.toggle.profiler():map("<leader>dpp")
+  snacks.toggle.profiler_highlights():map("<leader>dph")
 
   if vim.lsp.inlay_hint then
-    Snacks.toggle.inlay_hints():map("<leader>uh")
+    snacks.toggle.inlay_hints():map("<leader>uh")
   end
 end)
 
@@ -291,10 +293,10 @@ u.with("bufferline", function()
   u.map("]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
 end)
 
-u.map("<leader>cp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown preview" })
-
-u.map("<leader>cm", "<cmd>Mason<cr>", { desc = "Mason" }, { with = "mason" })
-u.map("<leader>cl", "<cmd>Lazy<cr>", { desc = "Lazy" }, { with = "lazy" })
+u.map("<leader>Up", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown preview" })
+u.map("<leader>Um", "<cmd>Mason<cr>", { desc = "Mason" }, { with = "mason" })
+u.map("<leader>Ul", "<cmd>Lazy<cr>", { desc = "Lazy" }, { with = "lazy" })
+u.map("<leader>Uc", "<cmd>Conform<cr>", { desc = "Conform" }, { with = "conform" })
 
 -- -- floating terminal
 -- map("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })

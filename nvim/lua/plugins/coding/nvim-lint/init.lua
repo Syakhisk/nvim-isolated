@@ -5,7 +5,7 @@ return {
     -- Event to trigger linters
     events = { "BufWritePost", "BufReadPost", "InsertLeave" },
     linters_by_ft = {
-      ["*"] = { "cspell" },
+      -- ["*"] = { "cspell" },
       markdown = { "markdownlint-cli2" },
       docker = { "hadolint" },
     },
@@ -16,10 +16,12 @@ return {
     opts.linters = opts.linters or {}
 
     -- Change severity of cspell
-    opts.linters.cspell = require("lint.util").wrap(lint.linters.cspell, function(diagnostic)
-      diagnostic.severity = vim.diagnostic.severity.HINT
-      return diagnostic
-    end)
+    if opts.linters.cspell then
+      opts.linters.cspell = require("lint.util").wrap(lint.linters.cspell, function(diagnostic)
+        diagnostic.severity = vim.diagnostic.severity.HINT
+        return diagnostic
+      end)
+    end
 
     for name, linter in pairs(opts.linters) do
       if type(linter) == "table" and type(lint.linters[name]) == "table" then

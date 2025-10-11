@@ -6,8 +6,7 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
-    indent = {
-      enabled = true,
-    },
+    indent = { enabled = true },
+    notifier = { enabled = true },
   },
 }

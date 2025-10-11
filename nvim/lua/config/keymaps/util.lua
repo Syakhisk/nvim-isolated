@@ -52,6 +52,93 @@ M.bufferlineToggle = function()
   vim.opt.showtabline = vim.opt.showtabline:get() ~= 0 and 0 or 2
 end
 
+M.bufferFormat = function()
+  local has_fidget, progress = pcall(require, "fidget.progress")
+  local handle
+
+  if has_fidget then
+    handle = progress.handle.create({
+      title = "format",
+      message = "Formatting...",
+      lsp_client = { name = "format" },
+    })
+  end
+
+  local is_visual = vim.fn.mode():match("[vV]")
+
+  local range
+  if is_visual then
+    local start_pos = vim.api.nvim_buf_get_mark(0, "<")
+    local end_pos = vim.api.nvim_buf_get_mark(0, ">")
+
+    range = {}
+    range.start = { line = start_pos[1] - 1, character = start_pos[2] }
+    range["end"] = { line = end_pos[1] - 1, character = end_pos[2] }
+  end
+
+  local ok, conform = pcall(require, "conform")
+  if not ok then
+    vim.notify("conform not found, fallback to lsp buf format")
+    vim.lsp.buf.format({ async = true, range = range })
+
+    if is_visual then
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<ESC>", true, true, true), "n", true)
+    end
+
+    vim.defer_fn(function()
+      handle:report({ message = "Done" })
+      handle:finish()
+    end, 500)
+    return
+  end
+
+  conform.format({ async = true, lsp_fallback = true, force = true, range = range }, function(err, did_edit)
+    if err then
+      handle:report({ message = "❌ Failed" })
+      handle:finish()
+      return
+    end
+
+    handle:report({ message = "Done" })
+    handle:finish()
+  end)
+
+  if is_visual then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<ESC>", true, true, true), "n", true)
+  end
+end
+
+-- M.bufferFormat = function()
+--   local ok, conform = pcall(require, "conform")
+--
+--   local start_pos = vim.api.nvim_buf_get_mark(0, "<")
+--   local end_pos = vim.api.nvim_buf_get_mark(0, ">")
+--   local range = {
+--     start = { line = start_pos[1] - 1, character = start_pos[2] },
+--     ["end"] = { line = end_pos[1] - 1, character = end_pos[2] },
+--   }
+--
+--   if not ok then
+--     vim.lsp.buf.format({ async = true, range = range })
+--   else
+--     conform.format({ async = true, lsp_fallback = true, force = true, range = range })
+--   end
+--
+--   if vim.fn.mode():match("[vV]") then
+--     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<ESC>", true, true, true), "n", true)
+--   end
+-- end
+
+-- M.format = function()
+--   local ok, conform = pcall(require, "conform")
+--
+--   if not ok then
+--     vim.lsp.buf.format()
+--   end
+--
+--   conform.format()
+-- end
+
 M.splitsCloseAndBufferUnload = function()
   local bufnr = vim.api.nvim_get_current_buf()
   local windows = vim.fn.getbufinfo(bufnr)[1].windows

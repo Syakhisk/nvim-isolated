@@ -2,7 +2,6 @@
 ---@field log LibLog
 ---@field plugins LibPlugins
 ---@field strings LibStrings
----@field formatter LibFormatter
 ---@field constants LibConstants
 local M = {}
 
