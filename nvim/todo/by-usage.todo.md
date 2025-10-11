@@ -7,6 +7,7 @@
 |      | [keymap] colocate keymaps for telescope plugisn | 2 🟨   |     |
 |      | [keymap] copy maps from current dotfiles        | 2 🟨   |     |
 |      | [keymap] keymap silence notification            | 1 🟩   |     |
+|      | [keymap] treesitter                             | 3 🟥   |     |
 |      | [format] format with progress                   | 2 🟨   |     |
 |      | [dash] dashboard                                | 2 🟨   |     |
 |      | [dash] session save                             | 2 🟨   |     |
@@ -21,12 +22,13 @@
 
 ## P1
 
-| done | summary                                             | effort | id  |
-| ---- | --------------------------------------------------- | ------ | --- |
-|      | [test-dgb] DAP debugger UI                          | 3      |     |
-|      | [fidget] Fidget on long-running task (conform, lsp) | 2      |     |
-|      | [test] keymap to get current test                   | 2      |     |
-|      |                                                     | 1      |     |
+| done | summary                                               | effort | id  |
+| ---- | ----------------------------------------------------- | ------ | --- |
+|      | [test-dgb] DAP debugger UI                            | 3      |     |
+|      | [fidget] Fidget on long-running task (conform, lsp)   | 2      |     |
+|      | [test] keymap to get current test                     | 2      |     |
+|      | [toolbox] toolbox, keymaps, pkg, etc, use config file | 3 🟥   |     |
+|      |                                                       | 1      |     |
 
 ## Sort
 

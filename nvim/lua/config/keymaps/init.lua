@@ -1,3 +1,5 @@
+-- TODO: move lsp keymap to this folder?
+
 local u = require("config.keymaps.util")
 local tmux = require("pkg.tmux")
 
@@ -6,6 +8,15 @@ local map = vim.keymap.set
 -- Clipboard
 map({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy from system clipboard" })
 map({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+map({ "n" }, "<leader>Y", '"+y$', { desc = "Copy from system clipboard" })
+map({ "n", "v" }, "<leader>P", '"+P', { desc = "Paste from system clipboard" })
+
+-- Delete
+map({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete instead of cut" })
+map({ "n", "v" }, "<leader>D", '"_D', { desc = "Delete instead of cut " })
+
+-- Delete marks
+map("n", "dm", "<cmd>execute 'delmarks '.nr2char(getchar())<cr>", { desc = "Delete mark" })
 
 -- Tmux integration, fallback tmux navigation if nvim split is on edge
 map("n", "<c-w>h", tmux.navigate("h"))
@@ -24,7 +35,7 @@ map("v", "<leader>/", "gc", { desc = "Toggle comments", remap = true })
 map({ "n", "v" }, "<leader>lf", Lib.formatter.format, { desc = "Format file" })
 
 -- Select pasted text
-map("n", "gp", "`[v`]", { desc = "Select last pasted text" })
+map("n", "gV", "`[v`]", { desc = "Select last pasted text" })
 
 -- Duplicate and comment
 map("n", "yc", "yygccp", { desc = "Duplicate line and comment the original" })
@@ -46,6 +57,7 @@ map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr =
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
+-- Better next and prev search
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
 map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
@@ -84,12 +96,79 @@ map("n", "[e", u.diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", u.diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", u.diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
--- Redraw ui? not sure what this does
+-- Smart case renaming for word under cursor
+map("n", "<leader>Cr", ":S/<c-r><c-w>//g<left><left>", { desc = "Rename word under cursor (smart case, abolish.vim)" })
+
+-- Insert backtick (avoid triggering tmux prefix)
+map("i", "<c-q>", "`", { desc = "Insert backtick" })
+
+-- Split pane (with new buffer)
+map("n", "<c-w>V", "<cmd>vnew<cr>", { desc = "Split right (new empty buffer)" })
+map("n", "<c-w>S", "<cmd>new<cr>", { desc = "Split down (new empty buffer)" })
+
+-- Focus pane
+map("n", "<c-w><Enter>", u.paneToggleSize, { desc = "Toggle maximize/equal panes" })
+
+-- Redraw ui? not sure what this does (redraw might be useful for treesitter)
 map("n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / Clear hlsearch / Diff Update" })
 
--- highlights under cursor
+-- AST Inspection
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 map("n", "<leader>uI", u.inspec_tree, { desc = "Inspect Tree" })
+
+-- Git
+map("n", "<leader>gr", u.projectChangeToGitRoot, { desc = "Change to git root directory" })
+map("n", "<leader>gM", u.projectCompareWithMaster, { desc = "Compare with master (neotree & gitsigns change base)" })
+map("n", "<leader>gC", u.projectCompareWith, { desc = "Compare with commit/branch (neotree & gitsigns change base)" })
+
+-- Alternate last buffer
+map("n", "<c-a>", u.bufferAlternate, { desc = "Alternate (last) buffer" })
+
+-- Toggle bufferline
+map("n", "<leader>ub", u.bufferlineToggle, { desc = "Toggle bufferline" })
+
+-- Close windowless buffers
+map("n", "<leader>bD", "<cmd>CloseWindowlessBuffers<cr>", { desc = "Close hidden buffer (windowless)" })
+
+-- Close window and buffer (buffer unload)
+map("n", "<leader>bb", u.splitsCloseAndBufferUnload, { desc = "Unload buffer (close buffer and window)" })
+
+-- Grep
+map("n", "gG", u.projectGrepWithContext, { desc = "Go to line" })
+
+-- Folds
+map("n", "Zz", u.bufferFoldTopLevelClose, { desc = "Close all toplevel folds" })
+map("n", "Zo", u.bufferFoldTopLevelOpen, { desc = "Open all toplevel folds" })
+map("n", "ZZ", "<cmd>setlocal foldlevel=0<cr>", { desc = "Close all folds recursively" })
+map("n", "ZO", "<cmd>setlocal foldlevel=99<cr>", { desc = "Open all folds recursively" })
+
+-- Save as root (doesn't work on mac)
+map("ca", "w!!", "w !sudo -A tee '%'", { desc = "Save file as root" })
+
+-- Get/set filetype of current buffer
+map("n", "<leader>bf", u.bufferGetFiletype, { desc = "Get filetype of current buffer" })
+map("n", "<leader>bF", u.bufferSetFiletype, { desc = "Set filetype of current buffer" })
+
+-- Add undo break-points
+local breakpoints = ".,;([<{}>])"
+for i = 1, #breakpoints do
+  local ch = breakpoints:sub(i, i)
+  map("i", ch, ch .. "<c-g>u")
+end
+
+-- native snippets. only needed on < 0.11, as 0.11 creates these by default
+if vim.fn.has("nvim-0.11") == 0 then
+  map("s", "<Tab>", function()
+    return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
+  end, { expr = true, desc = "Jump Next" })
+  map({ "i", "s" }, "<S-Tab>", function()
+    return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
+  end, { expr = true, desc = "Jump Previous" })
+end
+
+--
+-- Plugins
+--
 
 ---@param snacks Snacks
 u.with("snacks", function(snacks)
@@ -111,6 +190,9 @@ u.with("snacks", function(snacks)
     -- end, { desc = "Git Browse (copy)" })
     --
   end
+
+  u.map("<leader>bd", snacks.bufdelete.delete, { desc = "Delete Buffer" })
+  u.map("<leader>bo", snacks.bufdelete.other, { desc = "Delete Other Buffers" })
 
   Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
   Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
@@ -207,25 +289,12 @@ u.with("bufferline", function()
   u.map("[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer" })
   u.map("]B", "<cmd>BufferLineMoveNext<cr>", { desc = "Move buffer next" })
   u.map("]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
-
-  u.map("<leader>bd", function()
-    require("snacks").bufdelete()
-  end, { desc = "Delete Buffer" })
-  u.map("<leader>bo", function()
-    require("snacks").bufdelete.other()
-  end, { desc = "Delete Other Buffers" })
 end)
-
 
 u.map("<leader>cp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown preview" })
 
 u.map("<leader>cm", "<cmd>Mason<cr>", { desc = "Mason" }, { with = "mason" })
 u.map("<leader>cl", "<cmd>Lazy<cr>", { desc = "Lazy" }, { with = "lazy" })
-
--- Add undo break-points
-map("i", ",", ",<c-g>u")
-map("i", ".", ".<c-g>u")
-map("i", ";", ";<c-g>u")
 
 -- -- floating terminal
 -- map("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
@@ -236,35 +305,11 @@ map("i", ";", ";<c-g>u")
 -- map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 -- map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
--- native snippets. only needed on < 0.11, as 0.11 creates these by default
-if vim.fn.has("nvim-0.11") == 0 then
-  map("s", "<Tab>", function()
-    return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
-  end, { expr = true, desc = "Jump Next" })
-  map({ "i", "s" }, "<S-Tab>", function()
-    return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
-  end, { expr = true, desc = "Jump Previous" })
-end
-
--- TODO: this is copied from lazyvim, pick and choose needed ones
--- -- buffers
--- map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
--- map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
--- map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
--- map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
--- map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
--- map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
--- map("n", "<leader>bd", function()
---   Snacks.bufdelete()
--- end, { desc = "Delete Buffer" })
--- map("n", "<leader>bo", function()
---   Snacks.bufdelete.other()
--- end, { desc = "Delete Other Buffers" })
--- map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
---
--- -- windows
--- map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
--- map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
--- map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
--- Snacks.toggle.zoom():map("<leader>wm"):map("<leader>uZ")
--- Snacks.toggle.zen():map("<leader>uz")
+-- TODO: toolbox
+-- -- Jetbrains Toolbox Golang URL
+-- --stylua: ignore start
+-- require("m42nk/toolbox").setup()
+-- vim.keymap.set( "n", "<leader>gty", require("m42nk/toolbox").copy_to_clipboard, { desc = "Copy current line location in GoLand URL" })
+-- vim.keymap.set( "n", "<leader>gto", require("m42nk/toolbox").open_in_toolbox, { desc = "Open current line location in GoLand URL" })
+-- vim.keymap.set( "n", "<leader>g<Enter>", require("m42nk/toolbox").open_in_toolbox, { desc = "Open current line location in GoLand URL" })
+-- --stylua: ignore end
