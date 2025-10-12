@@ -61,10 +61,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
--- vim.opt.breakindent = true
--- vim.opt.showbreak = "↪ "
--- vim.opt.linebreak = true
--- vim.opt.breakindentopt = "shift:2"
+vim.opt.breakindent = true
+vim.opt.showbreak = "↪ "
+vim.opt.linebreak = true
+vim.opt.breakindentopt = "shift:2"
 
--- vim.opt.updatetime = 250
--- vim.opt.timeoutlen = 300
+vim.opt.updatetime = 250 -- time to trigger CursorHold event + time it took to update swapfile
+vim.opt.timeoutlen = 300 -- time it took to wait for a keymap sequence to complete

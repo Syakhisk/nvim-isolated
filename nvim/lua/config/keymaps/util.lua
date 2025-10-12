@@ -36,17 +36,6 @@ end
 ----------
 -- Buffers
 ----------
-M.bufferAlternate = function()
-  vim.cmd.b("#")
-end
-
-M.bufferFoldTopLevelClose = function()
-  vim.cmd("%foldclose")
-end
-
-M.bufferFoldTopLevelOpen = function()
-  vim.cmd("%foldopen")
-end
 
 M.bufferlineToggle = function()
   vim.opt.showtabline = vim.opt.showtabline:get() ~= 0 and 0 or 2
@@ -239,16 +228,38 @@ end
 
 --- `with` will check if `name` is installed using pcall, passing in the required module
 --- as the param of the second argument.
----@param name string package name
----@param fn fun(pkg?: any) callback
+---@param name string|string[] package name
+---@param fn fun(pkg?: any|any[]) callback
 M.with = function(name, fn)
-  local ok, pkg = pcall(require, name)
-  if not ok then
-    Lib.log.to_file("[keymap] " .. name .. " is not installed")
+  local names = {}
+  local pkgs = {}
+
+  if type(name) == "string" then
+    names = { name }
+  else
+    names = name
+  end
+
+  for _, n in ipairs(names) do
+    local ok, pkg = pcall(require, n)
+    if not ok then
+      Lib.log.to_file("[keymap] " .. n .. " is not installed")
+      return
+    end
+
+    table.insert(pkgs, pkg)
+  end
+
+  if #pkgs == 0 then
     return
   end
 
-  fn(pkg)
+  if #pkgs == 1 then
+    fn(pkgs[1])
+    return
+  end
+
+  fn(unpack(pkgs))
 end
 
 return M

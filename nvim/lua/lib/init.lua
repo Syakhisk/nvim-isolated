@@ -17,4 +17,11 @@ setmetatable(M, {
   end,
 })
 
+M.wrap = function(f, ...)
+  local args = ...
+  return function()
+    f(args)
+  end
+end
+
 return M

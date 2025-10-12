@@ -120,10 +120,10 @@ map("n", "<leader>gM", u.projectCompareWithMaster, { desc = "Compare with master
 map("n", "<leader>gC", u.projectCompareWith, { desc = "Compare with commit/branch (neotree & gitsigns change base)" })
 
 -- Alternate last buffer
-map("n", "<c-a>", u.bufferAlternate, { desc = "Alternate (last) buffer" })
+map("n", "<c-a>", Lib.wrap(vim.cmd.b, "#"), { desc = "Alternate (last) buffer" })
 
 -- Toggle bufferline
-map("n", "<leader>ub", u.bufferlineToggle, { desc = "Toggle bufferline" })
+map("n", "<leader>uB", u.bufferlineToggle, { desc = "Toggle bufferline" })
 
 -- Close windowless buffers
 map("n", "<leader>bD", "<cmd>CloseWindowlessBuffers<cr>", { desc = "Close hidden buffer (windowless)" })
@@ -135,8 +135,8 @@ map("n", "<leader>bb", u.splitsCloseAndBufferUnload, { desc = "Unload buffer (cl
 map("n", "gG", u.projectGrepWithContext, { desc = "Go to line" })
 
 -- Folds
-map("n", "Zz", u.bufferFoldTopLevelClose, { desc = "Close all toplevel folds" })
-map("n", "Zo", u.bufferFoldTopLevelOpen, { desc = "Open all toplevel folds" })
+map("n", "Zz", Lib.wrap(vim.cmd, "%foldclose"), { desc = "Close all toplevel folds" })
+map("n", "Zo", Lib.wrap(vim.cmd, "%foldopen"), { desc = "Open all toplevel folds" })
 map("n", "ZZ", "<cmd>setlocal foldlevel=0<cr>", { desc = "Close all folds recursively" })
 map("n", "ZO", "<cmd>setlocal foldlevel=99<cr>", { desc = "Open all folds recursively" })
 
@@ -168,6 +168,54 @@ end
 -- Plugins
 --
 
+-- LSPs
+---@param snacks Snacks
+u.with({ "snacks" }, function(snacks)
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("custom-lsp-attach", { clear = true }),
+    callback = function(event)
+      local lspmap = function(keys, func, desc, mode)
+        mode = mode or "n"
+        vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+      end
+
+      local b = require("telescope.builtin")
+
+      lspmap("gd", Lib.wrap(b.lsp_definitions, { reuse_win = false, show_line = false }), "[G]oto [D]efinition")
+      lspmap("gr", Lib.wrap(b.lsp_references, { reuse_win = false, show_line = false, include_current_line = false }), "[G]oto [R]eferences")
+      lspmap("gi", Lib.wrap(b.lsp_implementations, { reuse_win = false, show_line = false }), "[G]oto [I]implementation")
+      lspmap("gy", Lib.wrap(b.lsp_type_definitions, { reuse_win = false }), "[G]oto T[y]pe definition")
+      lspmap("K", vim.lsp.buf.hover, "Hover")
+      lspmap("gK", vim.lsp.buf.signature_help, "Signature help")
+      lspmap("]]", Lib.wrap(snacks.words.jump, vim.v.count1), "Next reference")
+      lspmap("[[", Lib.wrap(snacks.words.jump, -vim.v.count1), "Prev reference")
+      lspmap("<C-S>", vim.lsp.buf.signature_help, "Signature help", { "i", "s" })
+      lspmap("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "v" })
+      lspmap("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
+      lspmap("<leader>cc", vim.lsp.codelens.run, "Run Codelens", { "n", "v" })
+      lspmap("<leader>cC", vim.lsp.codelens.refresh, "Refresh & Display Codelens")
+      lspmap("<leader>cR", snacks.rename.rename_file, "Rename file")
+      lspmap("<leader>cA", Lib.wrap(vim.lsp.buf.code_action, { apply = true, context = { only = { "source" } } }), "Source action")
+
+      -- { "gD", "<cmd>Lspsaga peek_definition<cr>", desc = "LSP: Peek Definition" },
+      -- { "gY", "<cmd>Lspsaga peek_type_definition<cr>", desc = "LSP: Peek Definition" },
+      -- { "gR", "<cmd>Lspsaga finder ref<cr>", desc = "LSP: Find References" },
+      -- { "gI", "<cmd>Lspsaga finder imp<cr>", desc = "LSP: Find Implementations" },
+
+      ------@type snacks.picker.lsp.Config
+      ---local picker_opts = {
+      ---  include_current = false,
+      ---}
+      ---
+      ---lspmap("gd", Lib.wrap(snacks.picker.lsp_definitions, picker_opts), "[G]oto [D]efinition")
+      ---lspmap("gD", Lib.wrap(snacks.picker.lsp_definitions, picker_opts), "[G]oto [D]efinition")
+      ---lspmap("gr", Lib.wrap(snacks.picker.lsp_references, picker_opts), "[G]oto [R]eferences")
+      ---lspmap("gi", Lib.wrap(snacks.picker.lsp_implementations, picker_opts), "[G]oto [I]implementation")
+      ---lspmap("gy", Lib.wrap(snacks.picker.lsp_type_definitions, { include_current = true }), "[G]oto T[y]pe definition")
+    end,
+  })
+end)
+
 ---@param snacks Snacks
 u.with("snacks", function(snacks)
   if vim.fn.executable("lazygit") == 1 then
@@ -191,10 +239,7 @@ u.with("snacks", function(snacks)
 
   u.map("<leader>bd", snacks.bufdelete.delete, { desc = "Delete Buffer" })
   u.map("<leader>bo", snacks.bufdelete.other, { desc = "Delete Other Buffers" })
-
-  u.map("<leader>un", function()
-    snacks.notifier.hide()
-  end, { desc = "Dismiss All Notifications" })
+  u.map("<leader>un", snacks.notifier.hide, { desc = "Dismiss All Notifications" })
 
   snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
   snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
@@ -280,6 +325,12 @@ u.with("bufferline", function()
   u.map("<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
   u.map("<c-s-h>", "<cmd>BufferLineMovePrev<cr>", { desc = "Move buffer previous" })
   u.map("<c-s-l>", "<cmd>BufferLineMoveNext<cr>", { desc = "Move buffer next" })
+
+  u.map("[B", "<cmd>BufferLineMovePrev<cr>", { desc = "Move buffer prev" })
+  u.map("]B", "<cmd>BufferLineMoveNext<cr>", { desc = "Move buffer next" })
+  u.map("[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer" })
+  u.map("]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
+
   u.map("<leader>b0", "<cmd>BufferLineTogglePin<cr>", { desc = "Toggle pin" })
   u.map("<leader>bH", "<cmd>BufferLineCloseLeft<cr>", { desc = "Close buffer to the left" })
   u.map("<leader>bL", "<cmd>BufferLineCloseRight<cr>", { desc = "Close buffer to the right" })
@@ -287,16 +338,14 @@ u.with("bufferline", function()
   u.map("<leader>bS", "<cmd>BufferLineSortByDirectory<cr>", { desc = "Sort buffer by directory" })
   u.map("<leader>bp", "<Cmd>BufferLineTogglePin<CR>", { desc = "Toggle Pin" })
   u.map("<leader>bp", "<cmd>BufferLinePick<cr>", { desc = "Pick buffer" })
-  u.map("[B", "<cmd>BufferLineMovePrev<cr>", { desc = "Move buffer prev" })
-  u.map("[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer" })
-  u.map("]B", "<cmd>BufferLineMoveNext<cr>", { desc = "Move buffer next" })
-  u.map("]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
 end)
 
-u.map("<leader>Up", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown preview" })
-u.map("<leader>Um", "<cmd>Mason<cr>", { desc = "Mason" }, { with = "mason" })
-u.map("<leader>Ul", "<cmd>Lazy<cr>", { desc = "Lazy" }, { with = "lazy" })
-u.map("<leader>Uc", "<cmd>Conform<cr>", { desc = "Conform" }, { with = "conform" })
+-- Open UIs
+u.map("<leader>wp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown preview" })
+u.map("<leader>wm", "<cmd>Mason<cr>", { desc = "Mason" }, { with = "mason" })
+u.map("<leader>wl", "<cmd>Lazy<cr>", { desc = "Lazy" }, { with = "lazy" })
+u.map("<leader>wc", "<cmd>Conform<cr>", { desc = "Conform" }, { with = "conform" })
+u.map("<leader>wL", Snacks.picker.lsp_config, { desc = "LSP: show info" })
 
 -- -- floating terminal
 -- map("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
