@@ -171,49 +171,46 @@ end
 -- LSPs
 ---@param snacks Snacks
 u.with({ "snacks" }, function(snacks)
-  vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("custom-lsp-attach", { clear = true }),
-    callback = function(event)
-      local lspmap = function(keys, func, desc, mode)
-        mode = mode or "n"
-        vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-      end
+  Lib.lsp.on_attach(function(client, buffer)
+    local lspmap = function(keys, func, desc, mode)
+      mode = mode or "n"
+      vim.keymap.set(mode, keys, func, { buffer = buffer, desc = "LSP: " .. desc })
+    end
 
-      local b = require("telescope.builtin")
+    local b = require("telescope.builtin")
 
-      lspmap("gd", Lib.wrap(b.lsp_definitions, { reuse_win = false, show_line = false }), "[G]oto [D]efinition")
-      lspmap("gr", Lib.wrap(b.lsp_references, { reuse_win = false, show_line = false, include_current_line = false }), "[G]oto [R]eferences")
-      lspmap("gi", Lib.wrap(b.lsp_implementations, { reuse_win = false, show_line = false }), "[G]oto [I]implementation")
-      lspmap("gy", Lib.wrap(b.lsp_type_definitions, { reuse_win = false }), "[G]oto T[y]pe definition")
-      lspmap("K", vim.lsp.buf.hover, "Hover")
-      lspmap("gK", vim.lsp.buf.signature_help, "Signature help")
-      lspmap("]]", Lib.wrap(snacks.words.jump, vim.v.count1), "Next reference")
-      lspmap("[[", Lib.wrap(snacks.words.jump, -vim.v.count1), "Prev reference")
-      lspmap("<C-S>", vim.lsp.buf.signature_help, "Signature help", { "i", "s" })
-      lspmap("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "v" })
-      lspmap("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
-      lspmap("<leader>cc", vim.lsp.codelens.run, "Run Codelens", { "n", "v" })
-      lspmap("<leader>cC", vim.lsp.codelens.refresh, "Refresh & Display Codelens")
-      lspmap("<leader>cR", snacks.rename.rename_file, "Rename file")
-      lspmap("<leader>cA", Lib.wrap(vim.lsp.buf.code_action, { apply = true, context = { only = { "source" } } }), "Source action")
+    lspmap("gd", Lib.wrap(b.lsp_definitions, { reuse_win = false, show_line = false }), "[G]oto [D]efinition")
+    lspmap("gr", Lib.wrap(b.lsp_references, { reuse_win = false, show_line = false, include_current_line = false }), "[G]oto [R]eferences")
+    lspmap("gi", Lib.wrap(b.lsp_implementations, { reuse_win = false, show_line = false }), "[G]oto [I]implementation")
+    lspmap("gy", Lib.wrap(b.lsp_type_definitions, { reuse_win = false }), "[G]oto T[y]pe definition")
+    lspmap("K", vim.lsp.buf.hover, "Hover")
+    lspmap("gK", vim.lsp.buf.signature_help, "Signature help")
+    lspmap("]]", Lib.wrap(snacks.words.jump, vim.v.count1), "Next reference")
+    lspmap("[[", Lib.wrap(snacks.words.jump, -vim.v.count1), "Prev reference")
+    lspmap("<C-S>", vim.lsp.buf.signature_help, "Signature help", { "i", "s" })
+    lspmap("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "v" })
+    lspmap("<leader>cr", vim.lsp.buf.rename, "Rename Symbol")
+    lspmap("<leader>cc", vim.lsp.codelens.run, "Run Codelens", { "n", "v" })
+    lspmap("<leader>cC", vim.lsp.codelens.refresh, "Refresh & Display Codelens")
+    lspmap("<leader>cR", snacks.rename.rename_file, "Rename file")
+    lspmap("<leader>cA", Lib.wrap(vim.lsp.buf.code_action, { apply = true, context = { only = { "source" } } }), "Source action")
 
-      -- { "gD", "<cmd>Lspsaga peek_definition<cr>", desc = "LSP: Peek Definition" },
-      -- { "gY", "<cmd>Lspsaga peek_type_definition<cr>", desc = "LSP: Peek Definition" },
-      -- { "gR", "<cmd>Lspsaga finder ref<cr>", desc = "LSP: Find References" },
-      -- { "gI", "<cmd>Lspsaga finder imp<cr>", desc = "LSP: Find Implementations" },
+    -- { "gD", "<cmd>Lspsaga peek_definition<cr>", desc = "LSP: Peek Definition" },
+    -- { "gY", "<cmd>Lspsaga peek_type_definition<cr>", desc = "LSP: Peek Definition" },
+    -- { "gR", "<cmd>Lspsaga finder ref<cr>", desc = "LSP: Find References" },
+    -- { "gI", "<cmd>Lspsaga finder imp<cr>", desc = "LSP: Find Implementations" },
 
-      ------@type snacks.picker.lsp.Config
-      ---local picker_opts = {
-      ---  include_current = false,
-      ---}
-      ---
-      ---lspmap("gd", Lib.wrap(snacks.picker.lsp_definitions, picker_opts), "[G]oto [D]efinition")
-      ---lspmap("gD", Lib.wrap(snacks.picker.lsp_definitions, picker_opts), "[G]oto [D]efinition")
-      ---lspmap("gr", Lib.wrap(snacks.picker.lsp_references, picker_opts), "[G]oto [R]eferences")
-      ---lspmap("gi", Lib.wrap(snacks.picker.lsp_implementations, picker_opts), "[G]oto [I]implementation")
-      ---lspmap("gy", Lib.wrap(snacks.picker.lsp_type_definitions, { include_current = true }), "[G]oto T[y]pe definition")
-    end,
-  })
+    ------@type snacks.picker.lsp.Config
+    ---local picker_opts = {
+    ---  include_current = false,
+    ---}
+    ---
+    ---lspmap("gd", Lib.wrap(snacks.picker.lsp_definitions, picker_opts), "[G]oto [D]efinition")
+    ---lspmap("gD", Lib.wrap(snacks.picker.lsp_definitions, picker_opts), "[G]oto [D]efinition")
+    ---lspmap("gr", Lib.wrap(snacks.picker.lsp_references, picker_opts), "[G]oto [R]eferences")
+    ---lspmap("gi", Lib.wrap(snacks.picker.lsp_implementations, picker_opts), "[G]oto [I]implementation")
+    ---lspmap("gy", Lib.wrap(snacks.picker.lsp_type_definitions, { include_current = true }), "[G]oto T[y]pe definition")
+  end)
 end)
 
 ---@param snacks Snacks

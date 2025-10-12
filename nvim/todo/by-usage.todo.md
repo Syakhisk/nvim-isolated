@@ -4,13 +4,14 @@
 
 | done | summary                                         | effort | id  |
 | ---- | ----------------------------------------------- | ------ | --- |
+|      | [golang] code-lens, etc. use from lazyvim       | 3 🟥   |     |
 |      | [keymap] treesitter                             | 3 🟥   |     |
 |      | [dash] dashboard                                | 2 🟨   |     |
 |      | [dash] session save                             | 2 🟨   |     |
 |      | [test] neotest                                  | 3 🟥   |     |
 |      | [git] gitsigns                                  | 3 🟥   |     |
 |      | [spell] code-action                             | 3 🟥   |     |
-|      | [golang] code-lens, etc. use from lazyvim       | 3 🟥   |     |
+|      | [telescope] use live-grep-args                  | 1 🟩   |     |
 | x    | [ui] code-action option use popup               | 1 🟩   |     |
 | x    | [format] format with progress                   | 2 🟨   |     |
 | x    | [keymap] keymap silence notification            | 1 🟩   |     |

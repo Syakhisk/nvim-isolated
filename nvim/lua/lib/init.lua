@@ -3,6 +3,7 @@
 ---@field plugins LibPlugins
 ---@field strings LibStrings
 ---@field constants LibConstants
+---@field lsp LibLSP
 local M = {}
 
 setmetatable(M, {

@@ -41,12 +41,14 @@ return {
     end,
   },
 
-  {
-    "mason-org/mason-lspconfig.nvim",
-    version = "v2.*",
-    opts = {
-      -- auto install for LSP servers
-      ensure_installed = { "lua_ls" },
-    },
-  },
+  -- autosetup lsp server installed from mason
+  -- {
+  --   "mason-org/mason-lspconfig.nvim",
+  --   version = "v2.*",
+  --   opts = {
+  --     -- auto install for LSP servers
+  --     ensure_installed = { "lua_ls" },
+  --   },
+  --   config = function() end,
+  -- },
 }
