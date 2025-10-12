@@ -2,6 +2,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     opts = { ensure_installed = { "go", "gomod", "gowork", "gosum" } },
   },
   {
@@ -75,7 +76,6 @@ return {
   },
   {
     "nvimtools/none-ls.nvim",
-    optional = true,
     dependencies = {
       {
         "mason-org/mason.nvim",
@@ -94,7 +94,6 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    optional = true,
     opts = {
       formatters_by_ft = {
         go = { "goimports", "gofumpt" },
@@ -103,7 +102,6 @@ return {
   },
   {
     "mfussenegger/nvim-dap",
-    optional = true,
     dependencies = {
       {
         "mason-org/mason.nvim",
@@ -117,16 +115,33 @@ return {
   },
   {
     "nvim-neotest/neotest",
-    optional = true,
     dependencies = {
-      "fredrikaverpil/neotest-golang",
+      {
+        "fredrikaverpil/neotest-golang",
+        version = "*",
+        build = function()
+          vim.system({ "go", "install", "gotest.tools/gotestsum@latest" }):wait() -- Optional, but recommended
+        end,
+      },
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
     },
     opts = {
       adapters = {
         ["neotest-golang"] = {
           -- Here we can set options for neotest-golang, e.g.
           -- go_test_args = { "-v", "-race", "-count=1", "-timeout=60s" },
+          runner = "gotestsum",
+
+          warn_test_name_dupes = false,
           dap_go_enabled = true, -- requires leoluz/nvim-dap-go
+          testify_enabled = true,
+          go_test_args = {
+            "-v",
+            "-race",
+            "-count=1",
+            "-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out",
+          },
         },
       },
     },

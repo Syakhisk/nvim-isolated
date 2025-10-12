@@ -68,3 +68,7 @@ vim.opt.breakindentopt = "shift:2"
 
 vim.opt.updatetime = 250 -- time to trigger CursorHold event + time it took to update swapfile
 vim.opt.timeoutlen = 300 -- time it took to wait for a keymap sequence to complete
+
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevel = 99 -- set high default foldlevel so that lsp folding doesn't close all folds on open
+vim.opt.foldtext = ""

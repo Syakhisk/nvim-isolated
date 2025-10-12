@@ -168,7 +168,7 @@ end
 -- Plugins
 --
 
--- LSPs
+---- LSP ----
 ---@param snacks Snacks
 u.with({ "snacks" }, function(snacks)
   Lib.lsp.on_attach(function(client, buffer)
@@ -211,6 +211,36 @@ u.with({ "snacks" }, function(snacks)
     ---lspmap("gi", Lib.wrap(snacks.picker.lsp_implementations, picker_opts), "[G]oto [I]implementation")
     ---lspmap("gy", Lib.wrap(snacks.picker.lsp_type_definitions, { include_current = true }), "[G]oto T[y]pe definition")
   end)
+end)
+
+---- Testing ----
+
+---@param neotest neotest
+u.with("neotest", function(neotest)
+  u.map("<leader>t", "", { desc = "+test" })
+
+  local runfile = function()
+    neotest.run.run(vim.fn.expand("%"))
+  end
+
+  local runcwd = function()
+    neotest.run.run(vim.uv.cwd())
+  end
+
+  local togglewatch = function()
+    neotest.watch.toggle(vim.fn.expand("%"))
+  end
+
+  u.map("<leader>tt", runfile, { desc = "Run File (Neotest)" })
+  u.map("<leader>tT", runcwd, { desc = "Run All Test Files (Neotest)" })
+  u.map("<leader>tr", neotest.run.run, { desc = "Run Nearest (Neotest)" })
+  u.map("<leader>tl", neotest.run.run_last, { desc = "Run Last (Neotest)" })
+  u.map("<leader>ts", neotest.summary.toggle, { desc = "Toggle Summary (Neotest)" })
+  u.map("<leader>to", Lib.wrap(neotest.output.open, { enter = true, auto_close = true }), { desc = "Show Output (Neotest)" })
+  u.map("<leader>tO", neotest.output_panel.toggle, { desc = "Toggle Output Panel (Neotest)" })
+  u.map("<leader>tS", neotest.run.stop, { desc = "Stop (Neotest)" })
+  u.map("<leader>tw", togglewatch, { desc = "Toggle Watch (Neotest)" })
+  u.map("<leader>td", Lib.wrap(neotest.run.run, { strategy = "dap" }), { desc = "debug nearest (Neotest)" })
 end)
 
 ---@param snacks Snacks
@@ -338,6 +368,7 @@ u.with("bufferline", function()
 end)
 
 -- Open UIs
+u.map("<leader>w", "", { desc = "+plugin windows" })
 u.map("<leader>wp", "<cmd>MarkdownPreviewToggle<cr>", { desc = "Markdown preview" })
 u.map("<leader>wm", "<cmd>Mason<cr>", { desc = "Mason" }, { with = "mason" })
 u.map("<leader>wl", "<cmd>Lazy<cr>", { desc = "Lazy" }, { with = "lazy" })

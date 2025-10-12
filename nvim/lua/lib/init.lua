@@ -4,6 +4,7 @@
 ---@field strings LibStrings
 ---@field constants LibConstants
 ---@field lsp LibLSP
+---@field treesitter LibTreesitter
 local M = {}
 
 setmetatable(M, {
