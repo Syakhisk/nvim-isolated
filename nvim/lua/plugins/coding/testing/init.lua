@@ -4,7 +4,7 @@ return {
     "nvim-neotest/neotest",
     dependencies = { "nvim-neotest/nvim-nio" },
     opts = {
-      -- log_level = vim.log.levels.DEBUG,
+      -- log_level = vim.log.levels.INFO,
       -- Can be a list of adapters like what neotest expects,
       -- or a list of adapter names,
       -- or a table of adapter names, mapped to adapter configs.
@@ -90,6 +90,7 @@ return {
         end
       end
 
+      -- Overwrites adapter mechanism
       if opts.adapters then
         local adapters = {}
         for name, config in pairs(opts.adapters or {}) do

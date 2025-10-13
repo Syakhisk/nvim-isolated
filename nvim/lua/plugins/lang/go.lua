@@ -128,15 +128,21 @@ return {
       "nvim-lua/plenary.nvim",
     },
     opts = {
+      -- log_level = vim.log.levels.DEBUG,
+      -- .local/state/nvim/neotest.log
+
       adapters = {
         ["neotest-golang"] = {
+          -- log_level = vim.log.levels.DEBUG,
+          -- .local/state/nvim/neotest-golang.log
+
           -- Here we can set options for neotest-golang, e.g.
           -- go_test_args = { "-v", "-race", "-count=1", "-timeout=60s" },
           runner = "gotestsum",
 
           warn_test_name_dupes = false,
           dap_go_enabled = true, -- requires leoluz/nvim-dap-go
-          testify_enabled = true,
+          -- testify_enabled = true,
           go_test_args = {
             "-v",
             "-race",
