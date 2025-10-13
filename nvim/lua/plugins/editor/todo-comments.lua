@@ -1,5 +1,8 @@
+---@type LazySpec
 return {
   "folke/todo-comments.nvim",
+  events = "LazyFile",
+  cmd = { "TodoTrouble", "TodoTelescope" },
   opts = {
     keywords = {
       SAKIS = { icon = "", color = "error" },

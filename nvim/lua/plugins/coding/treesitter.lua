@@ -17,7 +17,7 @@ return {
       end)
     end,
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-    event = { "VeryLazy" },
+    event = { "LazyFile", "VeryLazy" },
     cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
     opts_extend = { "ensure_installed" },
     ---@alias lazyvim.TSFeat { enable?: boolean, disable?: string[] }
@@ -194,6 +194,7 @@ return {
   -- Automatically add closing tags for HTML and JSX
   {
     "windwp/nvim-ts-autotag",
+    event = "LazyFile",
     opts = {},
   },
 

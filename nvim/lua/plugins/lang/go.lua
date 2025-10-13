@@ -76,6 +76,7 @@ return {
   },
   {
     "nvimtools/none-ls.nvim",
+    event = "LazyFile",
     dependencies = {
       {
         "mason-org/mason.nvim",

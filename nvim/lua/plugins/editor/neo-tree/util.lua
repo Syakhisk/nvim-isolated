@@ -68,7 +68,7 @@ M.init_fn = function()
       end
 
       ---@diagnostic disable-next-line: param-type-mismatch
-      local stats = vim.loop.fs_stat(vim.fn.argv(0))
+      local stats = vim.uv.fs_stat(vim.fn.argv(0))
 
       if stats and stats.type == "directory" then
         require("neo-tree")

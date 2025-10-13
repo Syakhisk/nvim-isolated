@@ -1,6 +1,6 @@
----@class LibTreesitter
-
 --- Taken from LazyVim
+
+---@class LibTreesitter
 local M = {}
 
 M._installed = nil ---@type table<string,boolean>?

@@ -13,6 +13,8 @@
 |      | [git] gitsigns                                             | 3 🟥   |     |
 |      | [spell] code-action                                        | 3 🟥   |     |
 |      | [telescope] use live-grep-args                             | 1 🟩   |     |
+|      | [treesitter] context                                       | 1 🟩   |     |
+|      | [bufferline] always sort buffer by open time               | 1 🟩   |     |
 | x    | [ui] code-action option use popup                          | 1 🟩   |     |
 | x    | [format] format with progress                              | 2 🟨   |     |
 | x    | [keymap] keymap silence notification                       | 1 🟩   |     |
