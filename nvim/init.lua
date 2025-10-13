@@ -7,6 +7,8 @@ if Lib.plugins.has("snacks") then
   _G.Snacks = require("snacks")
 end
 
+Lib.root.setup()
+
 require("config.keymaps")
 require("config.abbrevs")
 require("config.autocmds")

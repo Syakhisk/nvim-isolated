@@ -153,7 +153,7 @@ end
 -- Project
 ----------
 M.projectChangeToGitRoot = function()
-  vim.cmd("CdGitRoot")
+  vim.api.nvim_set_current_dir(Lib.root.git())
 end
 
 M.projectCompareWithMaster = function()
