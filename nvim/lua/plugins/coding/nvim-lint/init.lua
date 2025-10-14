@@ -42,7 +42,7 @@ return {
 
     vim.api.nvim_create_autocmd(opts.events, {
       group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
-      callback = u.debounce(100, u.lint),
+      callback = Lib.debounce(100, u.lint),
     })
   end,
 }

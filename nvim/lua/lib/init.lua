@@ -33,4 +33,39 @@ M.wrap = function(f, ...)
   end
 end
 
+M.interval = function(fn, ms)
+  local uv = vim.uv or vim.loop
+  local t = uv.new_timer()
+
+  t:start(
+    0,
+    ms,
+    vim.schedule_wrap(function()
+      if t:is_closing() then
+        return
+      end
+      fn()
+    end)
+  )
+
+  return function()
+    if not t:is_closing() then
+      t:stop()
+      t:close()
+    end
+  end
+end
+
+function M.debounce(ms, fn)
+  local timer = vim.uv.new_timer()
+
+  return function(...)
+    local argv = { ... }
+    timer:start(ms, 0, function()
+      timer:stop()
+      vim.schedule_wrap(fn)(unpack(argv))
+    end)
+  end
+end
+
 return M

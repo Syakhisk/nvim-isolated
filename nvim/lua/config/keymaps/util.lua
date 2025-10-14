@@ -42,16 +42,8 @@ M.bufferlineToggle = function()
 end
 
 M.bufferFormat = function()
-  local has_fidget, progress = pcall(require, "fidget.progress")
-  local handle
-
-  if has_fidget then
-    handle = progress.handle.create({
-      title = "format",
-      message = "Formatting...",
-      lsp_client = { name = "format" },
-    })
-  end
+  local pb = require("pkg.progress").new("format")
+  pb:update("Formatting...")
 
   local is_visual = vim.fn.mode():match("[vV]")
 
@@ -75,21 +67,18 @@ M.bufferFormat = function()
     end
 
     vim.defer_fn(function()
-      handle:report({ message = "Done" })
-      handle:finish()
+      pb:finish()
     end, 500)
     return
   end
 
   conform.format({ async = true, lsp_fallback = true, force = true, range = range }, function(err, did_edit)
     if err then
-      handle:report({ message = "❌ Failed" })
-      handle:finish()
+      pb:cancel("❌ Failed")
       return
     end
 
-    handle:report({ message = "Done" })
-    handle:finish()
+    pb:finish()
   end)
 
   if is_visual then

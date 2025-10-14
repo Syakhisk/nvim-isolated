@@ -217,6 +217,8 @@ end)
 
 ---@param neotest neotest
 u.with("neotest", function(neotest)
+  _ = require("neotest")
+
   u.map("<leader>t", "", { desc = "+test" })
 
   local runfile = function()
