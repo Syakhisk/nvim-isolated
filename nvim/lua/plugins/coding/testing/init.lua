@@ -3,6 +3,7 @@ return {
   {
     "nvim-neotest/neotest",
     dependencies = { "nvim-neotest/nvim-nio" },
+
     opts = {
       -- log_level = vim.log.levels.INFO,
       -- Can be a list of adapters like what neotest expects,
@@ -85,7 +86,23 @@ return {
                 end
               end
             end)
+
             return {}
+          end
+        end
+      end
+
+      if Lib.plugins.has("fidget.nvim") then
+        opts.consumers = opts.consumers or {}
+
+        ---@type neotest.Consumer
+        opts.consumers.fidget = function(client)
+          client.listeners.starting = function()
+            require("fidget").notify("Tests starting...", nil, { key = "test", annote = "test" })
+          end
+
+          client.listeners.started = function()
+            require("fidget").notify("Tests started...", nil, { key = "test", annote = "test" })
           end
         end
       end

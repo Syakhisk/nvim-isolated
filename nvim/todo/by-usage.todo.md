@@ -4,7 +4,6 @@
 
 | done | summary                                                                 | effort | id  |
 | ---- | ----------------------------------------------------------------------- | ------ | --- |
-| ~    | [test] fidget progress                                                  | 3 🟥   |     |
 |      | [noice] better notification, route                                      | 1 🟩   |     |
 |      | [test] coverage                                                         | 1 🟩   |     |
 |      | [keymap] treesitter                                                     | 3 🟥   |     |
@@ -26,6 +25,7 @@
 | x    | [keymap] lsp (copy current + lazyvim)                                   | 2 🟥   |     |
 | x    | [golang] code-lens, etc. use from lazyvim                               | 3 🟥   |     |
 | x    | [test] neotest                                                          | 3 🟥   |     |
+| x    | [test] fidget progress                                                  | 3 🟥   |     |
 |      |                                                                         | 1 🟩   |     |
 |      |                                                                         | 2 🟨   |     |
 |      |                                                                         | 3 🟥   |     |
