@@ -4,12 +4,11 @@
 
 | done | summary                                                                 | effort | id  |
 | ---- | ----------------------------------------------------------------------- | ------ | --- |
-|      | [noice] better notification, route                                      | 1 🟩   |     |
+|      | [git] gitsigns (keymaps)                                                | 3 🟥   |     |
+|      | [dash] dashboard                                                        | 2 🟨   |     |
 |      | [test] coverage                                                         | 1 🟩   |     |
 |      | [keymap] treesitter                                                     | 3 🟥   |     |
-|      | [dash] dashboard                                                        | 2 🟨   |     |
 |      | [dash] session save                                                     | 2 🟨   |     |
-|      | [git] gitsigns                                                          | 3 🟥   |     |
 |      | [spell] code-action                                                     | 3 🟥   |     |
 |      | [telescope] use live-grep-args                                          | 1 🟩   |     |
 |      | [treesitter] context                                                    | 1 🟩   |     |
@@ -34,6 +33,7 @@
 
 | done | summary                                                                                            | effort | id  |
 | ---- | -------------------------------------------------------------------------------------------------- | ------ | --- |
+|      | [noice] better notification, route                                                                 | 1 🟩   |     |
 |      | [testing] contribute to neotest-golang for testify                                                 | 3 🟥   |     |
 |      | [qol] alternate file between implementation and test (create own, or find library, check lazyvim)  | 1 🟩   |     |
 |      | [qol] vim implement "temp-buffer" like vscode so that browsing codebase doesn't pollute bufferline | 1 🟩   |     |
