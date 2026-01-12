@@ -49,12 +49,10 @@ M.bufferFormat = function()
 
   local range
   if is_visual then
-    local start_pos = vim.api.nvim_buf_get_mark(0, "<")
-    local end_pos = vim.api.nvim_buf_get_mark(0, ">")
-
-    range = {}
-    range.start = { line = start_pos[1] - 1, character = start_pos[2] }
-    range["end"] = { line = end_pos[1] - 1, character = end_pos[2] }
+    range = {
+      start = vim.api.nvim_buf_get_mark(0, "<"),
+      ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+    }
   end
 
   local ok, conform = pcall(require, "conform")
@@ -72,7 +70,16 @@ M.bufferFormat = function()
     return
   end
 
-  conform.format({ async = true, lsp_fallback = true, force = true, range = range }, function(err, did_edit)
+  conform.format({
+    async = true,
+    lsp_fallback = true,
+    force = true,
+    -- range = {
+    -- start = vim.api.nvim_buf_get_mark(0, "<"),
+    -- ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+    -- },
+    range,
+  }, function(err, did_edit)
     if err then
       pb:cancel("❌ Failed")
       return

@@ -10,6 +10,7 @@ return {
     },
     formatters_by_ft = {
       lua = { "stylua" },
+      markdown = { "prettierd", "prettier" },
 
       -- lua = { "stylua" },
       -- -- Conform will run multiple formatters sequentially
